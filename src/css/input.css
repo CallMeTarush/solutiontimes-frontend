@@ -1,0 +1,31 @@
+input {
+  background: #F5F3F9;
+  border: 0;
+  font-size: 4rem;
+}
+.question {
+  width: 100% !important;
+}
+
+@media screen and (max-width: 768px) {
+  input {
+    font-size: 2rem;
+    margin: 20px 0;
+  }
+  .challenge {
+    margin: 25px 0;
+  }
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #CEC9CB;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #CEC9CB;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #CEC9CB;
+}

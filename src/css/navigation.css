@@ -1,0 +1,26 @@
+.selected {
+    color: white;
+    font-size: 20.7px;
+  
+    font-weight: bold;  
+    font-style: normal;  
+    font-stretch: normal;  
+    line-height: normal;  
+    letter-spacing: 0.5px;  
+    text-align: left;
+    color: #3a3a3a !important;
+    text-decoration: none !important;
+}
+
+.null {
+
+    font-size: 20.7px;  
+    font-weight: bold;  
+    font-style: normal;  
+    font-stretch: normal;  
+    line-height: normal;  
+    letter-spacing: 0.5px;  
+    text-align: left;  
+    color: #8b8b8b !important;
+    text-decoration: none !important;
+}

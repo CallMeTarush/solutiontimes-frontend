@@ -1,0 +1,30 @@
+.title {
+    font-size: 24px;
+    margin: 20px 0;
+    text-align: center;
+}
+.contestants {
+    float: left;
+}
+.date {
+    float: right;
+}
+.category {
+    margin: 10px 0;
+}
+.challenge {
+    margin: 5%;
+
+    height: 100%;
+    background-color: #ffffff !important;  
+    box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
+    transition: all .2s ease-in-out;
+}
+.challenge:hover {
+    box-shadow: 0px 2px 20px 0.9px rgba(0, 0, 0, 0.2) !important;
+    cursor: pointer;
+    transform: scale(1.1);
+} 
+.big-challenge {
+    color: black !important;
+}

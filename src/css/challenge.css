@@ -1,0 +1,11 @@
+.challenge-category {
+    float: left;
+}
+.challenge-date {
+    float: right;
+}
+.challenge-title {
+    font-weight: bold;
+    text-align: left;
+    font-size: 45px;
+}
