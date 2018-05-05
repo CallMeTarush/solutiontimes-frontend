@@ -17,18 +17,22 @@ class App extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         return (
         <div>       
             <NavLink to='/challenge'>
                 <div className="col col-lg-3 col-sm-6 col-xs-12 big-challenge">
                     <div className="challenge">
                         
-                        <div className="category"> Category: Agriculture </div>
-                        <ResponsiveEmbed src='https://www.youtube.com/embed/2yqz9zgoC-U' allowfullscreen />
+                        <div className="category"> Domain: {this.props.domain} </div>
+                        <ResponsiveEmbed src='https://www.youtube.com/embed/2yqz9zgoC-U' allowFullScreen />
                         <div className="title"> {this.props.title} </div>
-                        <div className="contestants"> Contestants: 240 </div>
-                        <div className="date"> 10/10/12 </div>
-
+                        
+                        <div className="details">
+                            <div className="contestants"> Contestants: 240 </div>
+                            <div className="date"> 10/10/12 </div>
+                        </div>
+                        <br className="clear" />
                     </div>
                 </div>
             </NavLink>         

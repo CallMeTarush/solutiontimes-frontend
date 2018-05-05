@@ -1,6 +1,6 @@
 .title {
     font-size: 24px;
-    margin: 20px 0;
+    margin: 20px 0; 
     text-align: center;
 }
 .contestants {
@@ -11,10 +11,26 @@
 }
 .category {
     margin: 10px 0;
+    padding: 3.3%;
+    padding-bottom: 0;
+}
+.clear { clear: both; }
+.details {
+    font-family: Raleway;
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.62;
+  letter-spacing: normal;
+  text-align: left;
+  color: #686868;
+    padding: 3.3%;
+    padding-top: 0;
 }
 .challenge {
+    
     margin: 5%;
-
     height: 100%;
     background-color: #ffffff !important;  
     box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
@@ -26,5 +42,5 @@
     transform: scale(1.1);
 } 
 .big-challenge {
-    color: black !important;
+    color: black !important;    
 }

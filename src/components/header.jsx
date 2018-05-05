@@ -5,6 +5,7 @@ import Navigation from '../navigation.js';
 import Main from '../main.js';
 
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap"
 // import 'bootstrap/dist/css/bootstrap.css';
 
@@ -13,7 +14,7 @@ class App extends React.Component {
       return (
 
         <div>
-          <div className="left-bar" >
+          <div>
             <Navbar collapseOnSelect>
               <Navbar.Header>
                 <Navbar.Brand>
@@ -25,16 +26,20 @@ class App extends React.Component {
                 
                 <Nav>
                   <NavItem eventKey={1} href="#">
-                    Home
+                    <NavLink to='/'>
+                      Home
+                    </NavLink>
                   </NavItem>
                   <NavItem eventKey={2} href="#">
-                    Mentors
+                    Student2Society
                   </NavItem>
                   <NavItem eventKey={3} href="#">
                     FAQ
                   </NavItem>
                   <NavItem eventKey={4} href="#">
-                    Contact Us
+                    <NavLink to='/contact'>
+                      Contact Us
+                    </NavLink>
                   </NavItem>
                 </Nav>
 

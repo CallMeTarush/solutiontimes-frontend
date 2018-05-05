@@ -1,14 +1,119 @@
 .container-div {
     margin: 0 10%;
 }
+.choice-select {
+    margin: 0;
+}
+#select {
+    background: white !important;
+    border: 0 !important;
+}
 .search-bar {
+    margin-top: 2%;
+    padding: 0%;
+    box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
+}
+.search-icon {
+    padding: 0;
     margin: 2% 0;
+    
+}
+.actual-search {
+    float: left;
+    background: #F6BE21;
+    box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
+    width: 50%;
 }
 .problemstatements {
     margin: 3% 0;
 }
+.choice-block {
+    margin: 0;
+    height: 100% !important;
+}
+.choice {
+    display: table-cell;
+    font-family: BrandonText;
+    font-size: 15px !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    font-stretch: normal !important;
+    line-height: 3 !important;
+    letter-spacing: normal !important;
+    text-align: left !important;
+    cursor: pointer;
+    color: #585858 !important;
+}
+.sorter {
+    display: table;
+    width: 100%;
+    padding: 0 10%;
+    background: white;
+}
+.selected {
+    background: #f5f5f5;
+}
+#nme {
+    height: 100%;
+    background: white;
+    padding: 0 2%;
+}
+.dropbtn {
+    
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 2rem;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #f5f5f5;
+}
+
 @media screen and (max-width: 768px) {
     .container-div {
         margin: 0 2%;
+    }
+    .search-bar {
+        margin: 5% 0;
+    }
+    input.question, textarea.question {        
+        font-size: 24px !important;
+    }
+    .search-icon {
+        margin: 5% 0;
+        font-size: 24px !important;
+    }
+    .question {
+        padding: 0;
+        margin: 0;
+        font-size: 4rem !important;
     }
 }

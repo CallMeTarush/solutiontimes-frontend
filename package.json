@@ -9,6 +9,7 @@
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
+    "react-dropdown": "^1.4.2",
     "react-icons": "^2.2.7",
     "react-overlays": "^0.8.3",
     "react-responsive-embed": "^2.1.0",

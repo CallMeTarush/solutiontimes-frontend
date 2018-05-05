@@ -3,6 +3,9 @@ input {
   border: 0;
   font-size: 4rem;
 }
+.search-icon {
+  font-size: 4rem;
+}
 .question {
   width: 100% !important;
 }
