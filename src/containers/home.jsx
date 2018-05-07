@@ -34,6 +34,18 @@ class App extends React.Component {
   constructor() {
     super();
 
+    // axios.get('http://127.0.0.1:3000/challenges')
+    //   .then(({ data }) => {
+    //     console.log(data);
+    // })
+    // axios.post('http://127.0.0.1:3000/createChallenges', {
+    
+    //   name: 'Challenge 1',
+    //   domain: 'Social',
+    //   link: 'https://www.youtube.com/watch?v=PPQ0par6DK4'
+
+    // })
+
     this.initLoad();
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -73,12 +85,7 @@ class App extends React.Component {
       }
     }
 
-    // axios.get(`${API_URL}?api_key=${API_KEY}&prefix=${this.state.query}&limit=7`)
-    //   .then(({ data }) => {
-    //     this.setState({
-    //       results: data.data
-    //     })
-    //   })
+    
   }
   
   initLoad = () => {

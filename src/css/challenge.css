@@ -90,6 +90,10 @@ th {
 }
 tr {
     text-align: center;
+    margin-bottom: 2%;
+    border-bottom: solid;
+    border-color: #aaa;
+    border-width: 2px;
 }
 tr:hover {
     background: #eee;    
