@@ -2,10 +2,17 @@
   font-family: 'brandonText';
   src: url('./css/brandon-text.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Raleway';
+  src: url('./css/Raleway-Regular.ttf') format('truetype');
+}
 
 body {
   margin: 0;
   padding: 0;
   font-family: 'brandonText';
   background: #f5f5f5;
+}
+html {
+  height: 100%;
 }

@@ -37,8 +37,11 @@ class App extends React.Component {
     this.initLoad();
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
+
   }
   
+
+
   getInfo = () => {
 
     var p = this.state.problemstatements.problemstatements;
@@ -195,7 +198,7 @@ class App extends React.Component {
                 value={this.state.selectValue} 
                 onChange={this.handleChange} 
               > 
-                <option> Select a domain </option>
+                <option> All Challenges</option>
                 <option> Agriculture </option>
                 <option> Social </option>
                 <option> Domain 4 </option>

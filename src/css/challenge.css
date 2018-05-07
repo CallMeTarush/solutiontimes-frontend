@@ -9,7 +9,6 @@
     text-align: left;
     font-size: 45px;
 }
-
 .challenge-content {
     /* padding: 0 15%; */
     margin-top: 5%;
@@ -22,12 +21,104 @@
     box-shadow: 0.4px 0.9px 2px 0px rgba(0, 0, 0, 0.13);
     
 }
-
 .challenge-people {
     background: white;
     padding: 5%;
     margin-bottom: 10px;
     box-shadow: 0.4px 0.9px 2px 0px rgba(0, 0, 0, 0.13);
+}
+table {
+    width: 100%;
+    font-family: Raleway;
+    font-size: 21px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 3;
+    letter-spacing: 0.8px;
+    text-align: left;
+    color: #6d6d6d;
+
+    cursor: pointer;
+}
+.details-challenge {
+    font-size:22px;
+}
+.contestant-row {
+    width: 25%;
+}
+.sponsor-row {
+    width: 33.3% !important;
+}
+.view {
+    color: #eeb237;
+    font-family: Raleway;
+    font-size: 19px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 3.32;
+    letter-spacing: 0.8px;
+}
+.mentor-row {
+    width: 25%;
+}
+.table-search {
+    width:100%;
+    padding: 1%;
+    background: #eee;
+    margin: 0;
+}
+th {
+    width:33.3%;
+    text-align: center !important;
+    border: solid;
+    border-width: 1px;
+}
+.title-challenge {
+
+    margin-top: 7%;
+
+    font-size: 46px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.46;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+}
+tr {
+    text-align: center;
+}
+tr:hover {
+    background: #eee;    
+}
+.sponsor-row {
+    width: 50%;
+}
+.selected-category {
+    color: #8cbded;
+    background: #EAE9E9;
+
+}
+.submit {
+    margin-top: 7%;
+    padding: 2%;
+    border: 0;
+    background: #F1BC10;
+    font-family: BrandonText;
+    font-size: 21px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.57;
+    letter-spacing: normal;
+    text-align: left;
+    color: #ffffff;
+}
+.batch-16 {
+    margin-top: 5%;
 }
 hr {
     display: block;
