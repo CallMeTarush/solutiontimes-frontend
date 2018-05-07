@@ -128,3 +128,25 @@ hr {
     margin: 0;
     
 }
+
+@media screen and (max-width: 768px) {
+    .title-challenge {
+        font-size: 18px !important;
+    }
+    .details-challenge {
+        font-size: 15px !important;
+    }
+    th {
+        font-size: 15px;
+        letter-spacing: 0;
+        
+    }
+    tr {
+        font-size: 12px;
+        letter-spacing: 0;
+        line-height: normal;
+    }
+    .view {
+        font-size: 12px;
+    }
+}
