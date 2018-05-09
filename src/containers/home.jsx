@@ -180,7 +180,7 @@ class App extends React.Component {
     
     var data_problemstatements;
     
-    axios.get('http://127.0.0.1:8000/problemstatements')
+    axios.get('http://139.59.13.187:8000/problemstatements')
       .then(({ data }) => {
         console.log(data);
         // this.state.problemstatements = data;

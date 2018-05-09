@@ -3,8 +3,9 @@ import React from 'react'
 import '../css/faq.css'
 import Header from '../components/header'
 import Faq from '../components/faq'
-
 import axios from 'axios'
+
+
 class App extends React.Component {
 
     constructor() {
@@ -12,13 +13,12 @@ class App extends React.Component {
 
         this.state = ({
             faqs: []
-        })
-        
+        })       
     }
 
     componentWillMount() {
         
-        axios.get('http://127.0.0.1:8000/faqs')
+        axios.get('http://139.59.13.187:8000/faqs')
             .then(({ data }) => {
                 console.log(data);
                 // this.state.problemstatements = data;
