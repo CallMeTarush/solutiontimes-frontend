@@ -6,6 +6,8 @@ import ResponsiveEmbed from 'react-responsive-embed'
 
 import FaSearch from 'react-icons/lib/fa/search'
 
+var QUERY_LENGTH;
+
 class App extends React.Component {
 
     constructor() {
@@ -14,6 +16,7 @@ class App extends React.Component {
             optionSelect: 0,
             data: [],
             active: [],
+            search: ''
         }
 
         this.toggle = this.toggle.bind(this);
@@ -22,7 +25,6 @@ class App extends React.Component {
 
     getRows() {
         
-        console.log(this.state.optionSelect);
         var data;
         var rows_to_push = [];
 
@@ -48,7 +50,6 @@ class App extends React.Component {
             
             data = this.state.data.sponsors;
             for(var j in data) {
-                console.log(data[j]);
                 rows_to_push.push(
                     <tr className="sponsor-row">
                         <td className="sponsor-row"> {data[j].name} </td>
@@ -92,7 +93,67 @@ class App extends React.Component {
             }
         )
     }
+    
+    getInfo = () => {
 
+        var search_data,p;
+
+        console.log(this.state.optionSelect);
+        console.log(this.search.value);        
+
+        if(this.state.optionSelect == 0) {
+            search_data = this.state.data.contestants;
+            this.state.data.contestants = search_data;
+        }
+
+        else if(this.state.optionSelect == 2) {
+            search_data = this.state.data.mentors;
+            this.state.data.mentors = search_data;
+        }
+        
+        else {
+            search_data = this.state.data.sponsors;
+            this.state.data.sponsors = search_data;
+        }
+
+        console.log(this.state.data);
+
+        if( QUERY_LENGTH == 0 ) {      
+            // for( var key in search_data ) {
+            //   this.state.queriedstatements.push(key);
+            // }
+        }
+      
+        else {
+      
+            while(this.state.queriedstatements.length > 0) {
+                this.state.queriedstatements.pop();
+            }
+      
+            for( var key in p) {
+              
+                var title = p[key].title;
+      
+                if(title.search(this.state.query)!=-1) {              
+                    this.state.queriedstatements.push(key);      
+                }
+
+                console.log(this.state.queriedstatements);
+            }
+        }
+    }
+
+    handleInputChange = () => {
+        
+        QUERY_LENGTH = this.search.value.length;
+    
+        this.setState({
+          query: this.search.value
+        }, () => {              
+          this.getInfo()        
+        })
+
+    }
     render() {
 
         let sponsorClass = [];
@@ -141,12 +202,12 @@ class App extends React.Component {
                             <form className="search-bar col-xs-12 table-search">
                                 
                                 <input
-                                placeholder="Search..."
+                                placeholder="Search"
                                 ref= {input => this.search = input}
                                 onChange={this.handleInputChange}
                                 type="text" 
                                 className="question"
-                                id="nme" required autocomplete="off" 
+                                id="nme2" required autocomplete="off" 
                                 />          
                             </form>
                         <table>                               

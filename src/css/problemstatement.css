@@ -1,7 +1,14 @@
 .title {
-    font-size: 24px;
-    margin: 20px 0; 
-    text-align: center;
+    margin: 10px 0; 
+    font-family: BrandonText;
+    font-size: 21px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000000;
+    padding: 0 3.3%;
 }
 .contestants {
     float: left;
@@ -17,20 +24,18 @@
 .clear { clear: both; }
 .details {
     font-family: Raleway;
-  font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.62;
-  letter-spacing: normal;
-  text-align: left;
-  color: #686868;
-    padding: 3.3%;
-    padding-top: 0;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #686868;
+    padding: 0 3.3%;    
 }
 .challenge {
     
-    margin: 5%;
+    margin: 5% 0;
     height: 100%;
     background-color: #ffffff !important;  
     box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;

@@ -9,23 +9,23 @@
     border: 0 !important;
 }
 .search-bar {
-    margin-top: 2%;
-    padding: 0%;
+    font-family: BrandonText;
+    padding: 0%;    
     box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
 }
 .search-icon {
     padding: 0;
-    margin: 2% 0;
-    
 }
 .actual-search {
-    float: left;
     background: #F6BE21;
     box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
-    width: 50%;
 }
 .problemstatements {
     margin: 3% 0;
+}
+.the-bar {
+    margin-top: 75px;
+    padding-left: 30px;
 }
 .choice-block {
     margin: 0;
@@ -54,6 +54,7 @@
     background: #f5f5f5;
 }
 #nme {
+    
     height: 100%;
     background: white;
     padding: 0 2%;
@@ -96,8 +97,32 @@
 .dropdown:hover .dropbtn {
     background-color: #f5f5f5;
 }
-
+@media screen and (max-width: 2244px) {
+    .actual-search {
+        width: 75% !important;
+        font-size: 30px;
+        padding: 10px 0;
+    }
+    #nme {
+        padding: 16px 10px;
+        font-size:24px;
+    }
+}
 @media screen and (max-width: 768px) {
+    .actual-search {
+        font-size: 16px;
+        padding: 4px 0;
+    }
+    .the-bar {
+        padding-left: 15px;
+    }
+    #nme {
+        padding: 0 5px;
+        font-size: 12px;
+    }
+    .big-challenge {
+        padding: 0;
+    }
     .container-div {
         margin: 0 2%;
     }

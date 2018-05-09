@@ -34,19 +34,14 @@ class App extends React.Component {
   constructor() {
     super();
 
-    // axios.get('http://127.0.0.1:3000/challenges')
-    //   .then(({ data }) => {
-    //     console.log(data);
-    // })
-    // axios.post('http://127.0.0.1:3000/createChallenges', {
+    
+    // axios.post('http://127.0.0.1:3000/challenges/createChallenges', {
     
     //   name: 'Challenge 1',
     //   domain: 'Social',
-    //   link: 'https://www.youtube.com/watch?v=PPQ0par6DK4'
+    //   link: 'PPQ0par6DK4'
 
-    // })
-
-    this.initLoad();
+    // })    
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
 
@@ -56,8 +51,7 @@ class App extends React.Component {
 
   getInfo = () => {
 
-    var p = this.state.problemstatements.problemstatements;
-    
+    var p = this.state.problemstatements;
     
     if( QUERY_LENGTH == 0 ) {
       
@@ -96,21 +90,19 @@ class App extends React.Component {
       selectValue: "Select a domain"
     });
 
-    var problemstatements = { "problemstatements": [ { "title":"This is a title", "description":"lmao", "videolink":"lmao", "domain":"Agriculture" }, { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" }, { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" }, { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" } , { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" }, { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" }, { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" }, { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" }, { "title":"This one is a title too", "description":"lmao", "videolink":"lmao", "domain":"Social" } ]};
-    
     var queriedstatements = [];
     this.state.queriedstatements = queriedstatements;
 
-    this.state.problemstatements = problemstatements;
-    
-    for(var key in this.state.problemstatements.problemstatements) {
+    console.log(this.state.problemstatements);
+
+    for(var key in this.state.problemstatements) {
       
-      console.log(key);
       this.state.queriedstatements.push(key);
 
     }
     console.log(this.state.queriedstatements);
     this.loadProblemStatements();
+    this.forceUpdate();
   }
 
   handleInputChange = () => {
@@ -128,26 +120,30 @@ class App extends React.Component {
 
   loadProblemStatements() {
 
-    var p = this.state.problemstatements.problemstatements;
+    var p = this.state.problemstatements;
     var probs = [];
     
     for (var prop in p) {
       
       for(var key in this.state.queriedstatements) {
-
+        
+        console.log(key,prop);
         if(prop == this.state.queriedstatements[key]) {
-
+          console.log("added statement");
           probs.push( <ProblemStatement
               title={p[prop].title} 
               description={p[prop].description} 
-              youtube = {p[prop].videolink}
+              youtube = {p[prop].video_id}
               domain = {p[prop].domain}
+              submissions = {p[prop].submissions}
+              date = {p[prop].time_to_show}
               /> 
           );
     
         }
       }   
     }
+
     return probs;
 
   }
@@ -165,7 +161,7 @@ class App extends React.Component {
     this.state.queriedstatements = [];
     this.setState({ selectValue:e.target.value });
     console.log(this.state.problemstatements);
-    var p = this.state.problemstatements.problemstatements;
+    var p = this.state.problemstatements;
     for(var key in p) {
       
       console.log(p[key].domain);
@@ -177,6 +173,25 @@ class App extends React.Component {
       }
 
     }
+
+  }
+
+  componentWillMount() {
+    
+    var data_problemstatements;
+    
+    axios.get('http://127.0.0.1:8000/problemstatements')
+      .then(({ data }) => {
+        console.log(data);
+        // this.state.problemstatements = data;
+        this.setState( 
+          {
+            problemstatements: data
+          }
+        );
+        console.log(this.state.problemstatements);
+        this.initLoad();
+    });
 
   }
 
@@ -214,24 +229,29 @@ class App extends React.Component {
             </span>          
           </div>          
         <div className="container-div">          
-          <form className="search-bar col-sm-6 col-xs-10">
-            <input
-              placeholder="Search"
-              ref= {input => this.search = input}
-              onChange={this.handleInputChange}
-              type="text" 
-              className="question"
-              id="nme" required autocomplete="off" 
-            />          
-          </form>
-          <div className="search-icon col-sm-1 col-xs-2 text-center">
-            <div className="actual-search">
-              <FaSearch />
+
+          <div className="the-bar">
+            <form className="search-bar col-sm-5 col-xs-10">
+              <input
+                placeholder="Search"
+                ref= {input => this.search = input}
+                onChange={this.handleInputChange}
+                type="text" 
+                className="question"
+                id="nme" required autoComplete="off" 
+              />          
+            </form>
+            <div className="search-icon col-sm-1 col-xs-2 text-center">
+              <div className="actual-search">
+                <FaSearch />
+              </div>
             </div>
           </div>
-            <div className="problemstatements col-md-12">
-              { this.loadProblemStatements() }
-            </div>          
+          <div className="problemstatements col-md-12">
+            { console.log("called") }
+             { this.loadProblemStatements() }
+          </div>          
+
         </div>
       </div>
     );

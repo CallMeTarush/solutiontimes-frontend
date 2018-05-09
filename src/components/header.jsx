@@ -34,7 +34,9 @@ class App extends React.Component {
                     Student2Society
                   </NavItem>
                   <NavItem eventKey={3} href="#">
-                    FAQ
+                    <NavLink to='/faq'>
+                      FAQ
+                    </NavLink>
                   </NavItem>
                   <NavItem eventKey={4} href="#">
                     <NavLink to='/contact'>

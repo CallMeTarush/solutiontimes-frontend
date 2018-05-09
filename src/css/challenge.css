@@ -65,9 +65,11 @@ table {
 }
 .table-search {
     width:100%;
-    padding: 1%;
-    background: #eee;
+    padding: 1% 2.3%;
+    background: #F5F5F5;
     margin: 0;
+    box-shadow: 0 !important;
+    -webkit-box-shadow: 0 !important;
 }
 th {
     width:33.3%;
@@ -132,8 +134,16 @@ hr {
     margin: 0;
     
 }
-
+#nme2 {
+    background: white;
+    font-size: 28px;
+    padding: 5px 20px;
+}
 @media screen and (max-width: 768px) {
+    #nme2 {
+        font-size: 12px !important;
+        padding: 1% 2% ;
+    }
     .title-challenge {
         font-size: 18px !important;
     }

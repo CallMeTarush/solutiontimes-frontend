@@ -12,12 +12,15 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            showModal: false
+            youtube: "https://www.youtube.com/embed/"
         };
     }
 
     render() {
-        console.log(this.props);
+        
+        var video_link = this.state.youtube.concat(this.props.youtube);
+        console.log(video_link)
+
         return (
         <div>       
             <NavLink to='/challenge'>
@@ -25,12 +28,12 @@ class App extends React.Component {
                     <div className="challenge">
                         
                         <div className="category"> Domain: {this.props.domain} </div>
-                        <ResponsiveEmbed src='https://www.youtube.com/embed/2yqz9zgoC-U' allowFullScreen />
+                        <ResponsiveEmbed src={video_link} allowFullScreen />
                         <div className="title"> {this.props.title} </div>
                         
                         <div className="details">
-                            <div className="contestants"> Contestants: 240 </div>
-                            <div className="date"> 10/10/12 </div>
+                            <div className="contestants"> Contestants: {this.props.submissions} </div>
+                            <div className="date"> {this.props.date} </div>
                         </div>
                         <br className="clear" />
                     </div>
