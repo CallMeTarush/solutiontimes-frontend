@@ -27,7 +27,8 @@ class App extends React.Component {
     selected: { value: 'two', label: 'Two'},
     showMenu: false,
     selectValue: 'all',
-    addClass: '1'
+    addClass: '1',
+    height: -69
   }
   
   
@@ -44,10 +45,12 @@ class App extends React.Component {
     // })    
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
-
+    this.updateDimensions = this.updateDimensions.bind(this);
   }
   
-
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
 
   getInfo = () => {
 
@@ -137,6 +140,9 @@ class App extends React.Component {
               domain = {p[prop].domain}
               submissions = {p[prop].submissions}
               date = {p[prop].time_to_show}
+              id = {p[prop].id}
+              onHeight = {this.handleHeight}
+              height = {this.state.height}
               /> 
           );
     
@@ -147,6 +153,17 @@ class App extends React.Component {
     return probs;
 
   }
+
+  handleHeight = (height) => {
+
+    var nis = this;
+    if(height > nis.state.height) {
+      nis.state.height = height ;
+      nis.forceUpdate();
+    }
+    
+  }
+
 
   toggle(j) {
     
@@ -180,6 +197,8 @@ class App extends React.Component {
     
     var data_problemstatements;
     
+    this.updateDimensions();
+    
     axios.get('http://139.59.13.187:8000/problemstatements')
       .then(({ data }) => {
         console.log(data);
@@ -194,7 +213,27 @@ class App extends React.Component {
     });
 
   }
+  
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+  
+  updateDimensions() {
 
+    var w = window,
+        d = document,
+        documentElement = d.documentElement,
+        body = d.getElementsByTagName('body')[0],
+        width = w.innerWidth || documentElement.clientWidth || body.clientWidth,
+        height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
+
+        this.state.height = -69;
+        this.forceUpdate();
+        
+        // if you are using ES2015 I'm pretty sure you can do this: this.setState({width, height});
+  }
+
+  
   render() {   
     console.log(this.state.selectValue);
     let challengeClass = ["choice choice-block col-xs-6 col-sm-2"];
@@ -248,8 +287,9 @@ class App extends React.Component {
             </div>
           </div>
           <div className="problemstatements col-md-12">
-            { console.log("called") }
+            
              { this.loadProblemStatements() }
+            
           </div>          
 
         </div>

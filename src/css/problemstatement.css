@@ -21,6 +21,7 @@
     padding: 3.3%;
     padding-bottom: 0;
 }
+
 .clear { clear: both; }
 .details {
     font-family: Raleway;
@@ -31,7 +32,12 @@
     letter-spacing: normal;
     text-align: left;
     color: #686868;
-    padding: 0 3.3%;    
+
+    position: absolute;
+    height: 10%;
+    width: 90%;
+    bottom: 0;
+    
 }
 .challenge {
     
@@ -47,5 +53,11 @@
     transform: scale(1.1);
 } 
 .big-challenge {
+    z-index: 70000;
     color: black !important;    
+}
+@media screen and (max-width: 1200px) {
+    .big-challenge {
+        margin-bottom: 25px;
+    }
 }

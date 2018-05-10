@@ -5,6 +5,7 @@ import Header from '../components/header'
 import ResponsiveEmbed from 'react-responsive-embed'
 
 import FaSearch from 'react-icons/lib/fa/search'
+import axios from 'axios'
 
 var QUERY_LENGTH;
 
@@ -16,11 +17,35 @@ class App extends React.Component {
             optionSelect: 0,
             data: [],
             active: [],
-            search: ''
+            search: '',
+            title: '',
+            description: '',
+            youtube: "https://www.youtube.com/embed/"
         }
 
         this.toggle = this.toggle.bind(this);
         this.getRows = this.getRows.bind(this);
+    }
+
+    componentWillMount() {
+        axios.get(`http://139.59.13.187:8000/problemstatements/${this.props.params.id}`)
+        .then(({ data }) => {
+            console.log(data);
+            // this.state.problemstatements = data;
+            // this.setState( 
+            // {
+            //     problemstatements: data
+            // }
+            // );
+            // console.log(this.state.problemstatements);
+            // this.initLoad();
+            this.setState({
+                title: data.title,
+                description: data.description
+            })
+            this.state.youtube = this.state.youtube.concat(data.video_id);
+            this.forceUpdate();
+        });
     }
 
     getRows() {
@@ -176,10 +201,10 @@ class App extends React.Component {
             <div className="col-md-12 challenge-content">
                 <div className="col-md-9 video-container">
                     <div className="challenge-video">
-                        <ResponsiveEmbed src='https://www.youtube.com/embed/2yqz9zgoC-U' allowFullScreen />
+                        <ResponsiveEmbed src={this.state.youtube} allowFullScreen />
 
-                        <h1 className="title-challenge">Title</h1>
-                        <div className="details-challenge"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rhoncus tincidunt diam, sed bibendum elit faucibus vitae. Vestibulum iaculis faucibus efficitur. Quisque egestas gravida faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum varius arcu sed nulla tempor feugiat. Integer at erat mi. Fusce feugiat felis a convallis ultrices. Donec sem neque, viverra sed porttitor quis, consectetur non massa. Ut bibendum ligula nibh. Curabitur in velit sed ipsum hendrerit hendrerit at id sem. Aliquam lacinia imperdiet tincidunt. Sed facilisis sollicitudin cursus. Donec vel porttitor leo. Ut auctor turpis eu venenatis ornare. Fusce a justo faucibus, congue velit id, tempor lacus.
+                        <h1 className="title-challenge">{this.state.title}</h1>
+                        <div className="details-challenge">{this.state.description}
 
 
 
