@@ -252,7 +252,7 @@ class App extends React.Component {
     return (      
       <div>
         <Header />  
-        <div className="sorter row col-xs-12">
+        <div className="sorter col-md-12">
             <span className={challengeClass.join(' ')} onClick={() => {this.toggle(1)}} >Challenges</span>          
             <span className={domainClass.join(' ')} onClick={() => {this.toggle(2)}} > 
               <select id="select"         

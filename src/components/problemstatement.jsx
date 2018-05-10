@@ -43,17 +43,16 @@ class App extends React.Component {
         <div>       
             <NavLink to={`/challenge/${this.props.id}`}>
                     <div className="col col-lg-3 col-sm-6 col-xs-12 big-challenge" >
+                        <div className="category"> Domain: {this.props.domain} </div>
                         <div className="challenge" style={matchHeight} id={this.props.id}>
                             
-                            <div className="category"> Domain: {this.props.domain} </div>
                             <ResponsiveEmbed src={video_link} allowFullScreen />
-                            <div className="title"> {this.props.title} </div>
+                            <div className="title"> <b> {this.props.title} </b> </div>
                             
-                            <div className="details">
-                                <span className="contestants"> Contestants: {this.props.submissions} </span>
-                                <span className="date"> {this.props.date} </span>
-                            </div>
-                            <br className="clear" />
+                        </div>
+                        <div className="details">
+                            <span className="contestants"> Contestants: {this.props.submissions} </span>
+                            <span className="date"> {this.props.date} </span>
                         </div>
                     </div>
             </NavLink>         

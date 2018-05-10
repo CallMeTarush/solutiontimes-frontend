@@ -1,7 +1,7 @@
 .title {
     margin: 10px 0; 
     font-family: BrandonText;
-    font-size: 21px;
+    font-size: 1.4rem;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
@@ -17,44 +17,52 @@
     float: right;
 }
 .category {
-    margin: 10px 0;
-    padding: 3.3%;
+    font-size: 1rem;
+    text-align: right;
     padding-bottom: 0;
+    color: #686868;
 }
 
 .clear { clear: both; }
 .details {
+    font-size: 1rem !important;
     font-family: Raleway;
-    font-size: 13px;
     font-weight: normal;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
     text-align: left;
     color: #686868;
-
-    position: absolute;
-    height: 10%;
-    width: 90%;
-    bottom: 0;
     
 }
 .challenge {
     
-    margin: 5% 0;
     height: 100%;
-    background-color: #ffffff !important;  
-    box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
-    transition: all .2s ease-in-out;
+    /* background-color: #ffffff !important;   */
+    /* box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important; */
+    
 }
 .challenge:hover {
     box-shadow: 0px 2px 20px 0.9px rgba(0, 0, 0, 0.2) !important;
-    cursor: pointer;
-    transform: scale(1.1);
+    cursor: pointer;    
 } 
 .big-challenge {
     z-index: 70000;
     color: black !important;    
+    transition: all .2s ease-in-out;
+}
+@media screen and (max-width: 1000px) {
+    .big-challenge {
+        margin-top: 3rem;
+    }
+}
+.big-challenge:hover {
+    transform: scale(1.1);
+}
+@media screen and (max-width: 768px) {
+    .challenge {
+        margin: 0;
+    }
 }
 @media screen and (max-width: 1200px) {
     .big-challenge {
