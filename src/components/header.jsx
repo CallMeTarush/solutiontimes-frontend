@@ -3,6 +3,7 @@ import '../css/header.css';
 
 import Navigation from '../navigation.js';
 import Main from '../main.js';
+import getLoggedIn from './variables'
 
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { NavLink } from 'react-router-dom'
@@ -10,7 +11,21 @@ import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap"
 // import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends React.Component {
-   render() {
+
+    constructor() {
+      super();
+      this.state = {
+        user: []
+      };
+
+      this.getUser = this.getUser.bind(this)
+      this.getUser();
+    }
+    getUser() {
+      
+    }
+
+    render() {
       return (
 
         <div>
@@ -44,11 +59,17 @@ class App extends React.Component {
                     </NavLink>
                   </NavItem>
                 </Nav>
-
+        
                 <Nav pullRight>
-                  <NavItem eventKey={1} href="#">
-                    Login or Sign Up
-                  </NavItem>                  
+                  { sessionStorage.getItem('userKey') ? (
+                    <NavItem eventKey={1} href="#">
+                      Hello, 
+                    </NavItem>                  
+                  ) : (
+                    <NavItem eventKey={1} href="#">
+                      Login or Sign Up
+                    </NavItem>                                      
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Navbar>

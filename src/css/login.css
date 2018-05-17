@@ -1,0 +1,121 @@
+.login-container {
+    background: #eee;
+    height: 100vh;
+}
+.bg-bottom {
+    background-color: #fdbd39;
+    position: fixed;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+.login-form {
+    background: white;
+    bottom: 0;
+    left: 0;
+    height: 54%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.14);
+
+}
+.login {
+    font-family: BrandonText;
+    font-size: 21px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #000000;
+    border-bottom: solid 0.1px;
+    border-color: #ddd;
+    margin-top: 3%;
+    padding-bottom: 2%;
+}
+.control-label {
+    font-family: BrandonText;
+    font-size: 17px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left !important;
+    color: #000000;
+
+    margin-top: 6%;
+}
+#first {
+    
+}
+input.login-input, textarea {
+    border-radius: 7px;
+    background-color: #eeeeee;  
+    height: 49px;
+}
+.signin {
+    border-radius: 7px;
+    background-color: #fdbd39;
+
+    font-family: BrandonText;
+    font-size: 21px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    padding: 10px;
+    color: #fffefe;
+
+    margin-bottom: 7%;
+}
+.signin:hover {
+    background-color: #fdbd39;
+    color: #fffefe;
+}
+.forgot-password {
+    margin-bottom: 7%;
+}
+.signup {
+    padding-top: 3%;
+    /* border-top: solid 0.1px;
+    border-color: #ddd; */
+    box-shadow: 0px -3px 5px 0 rgba(0, 0, 0, 0.09);
+}
+
+@media screen and (max-width: 1300px) {
+    .bg-bottom {
+        z-index: 0
+    }
+    .login-form {
+        height: 70%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .bg-bottom {
+        z-index: 0
+    }
+    .login-form {
+        
+        height: 70%;
+        margin: 0 10%;
+        margin-top: 15%;        
+    }
+}
+@media screen and (max-width: 400px) {
+    .bg-bottom {
+        z-index: 0
+    }
+    .login-form {        
+        height: 55%;
+        /* margin: 0 10%; */
+        margin-top: 22.5%;        
+    }
+}

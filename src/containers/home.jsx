@@ -5,8 +5,10 @@ import '../css/input.css';
 import axios from 'axios';
 import ProblemStatement from '../components/problemstatement'
 import Header from '../components/header'
+import getLoggedIn from '../components/variables'
 
 import { DropdownButton,MenuItem } from 'react-bootstrap'
+import { PulseLoader } from 'react-spinners'
 
 import FaSearch from 'react-icons/lib/fa/search'
 import FaAngleDown from 'react-icons/lib/fa/angle-down'
@@ -16,6 +18,8 @@ import 'react-dropdown/style.css'
 
 
 var QUERY_LENGTH;
+
+getLoggedIn();
 
 class App extends React.Component {
   
@@ -28,21 +32,14 @@ class App extends React.Component {
     showMenu: false,
     selectValue: 'all',
     addClass: '1',
-    height: -69
+    height: -69,
+    loading: true
   }
   
   
   constructor() {
     super();
 
-    
-    // axios.post('http://127.0.0.1:3000/challenges/createChallenges', {
-    
-    //   name: 'Challenge 1',
-    //   domain: 'Social',
-    //   link: 'PPQ0par6DK4'
-
-    // })    
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
     this.updateDimensions = this.updateDimensions.bind(this);
@@ -149,6 +146,10 @@ class App extends React.Component {
         }
       }   
     }
+    
+    this.state.loading = false;   
+    
+
 
     return probs;
 
@@ -270,7 +271,7 @@ class App extends React.Component {
         <div className="container-div">          
 
           <div className="the-bar">
-            <form className="search-bar col-sm-5 col-xs-10">
+            <form className="search-bar col-sm-6">
               <input
                 placeholder="Search"
                 ref= {input => this.search = input}
@@ -280,16 +281,29 @@ class App extends React.Component {
                 id="nme" required autoComplete="off" 
               />          
             </form>
-            <div className="search-icon col-sm-1 col-xs-2 text-center">
+            {/* <div className="search-icon col-sm-1 col-xs-2 text-center">
               <div className="actual-search">
                 <FaSearch />
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="problemstatements col-md-12">
+
             
-             { this.loadProblemStatements() }
-            
+            { this.state.loading ? (
+            <center className="loader" >  
+              <PulseLoader
+                  color={'#F7BF1E'} 
+                  loading={this.state.loading} 
+                  size={25}
+                />
+            </center>
+            )
+            :
+            (
+              this.loadProblemStatements()
+            )
+          }
           </div>          
 
         </div>
