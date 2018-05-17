@@ -64,9 +64,13 @@
         margin: 0;
     }
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
     .big-challenge {
         margin-bottom: 25px;
+    }
+    .title {
+        font-size: 13px !important;
+        font-weight: 100 !important;
     }
 }
 @media screen and (max-width: 1800px) {
