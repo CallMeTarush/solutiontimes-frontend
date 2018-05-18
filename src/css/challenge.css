@@ -138,6 +138,34 @@ hr {
     font-size: 28px;
     padding: 5px 20px;
 }
+@media screen and (max-width: 1300px) {
+    .title-challenge {
+        font-size: 28px;
+    }
+    .details-challenge {
+        font-size: 12px;
+    }
+    .submit {
+        font-size: 16px;
+        padding: 2%;
+    }
+    th {
+        font-size: 16px;
+    }
+    #nme2 {
+        font-size: 16px;
+    }
+    .contestant-row {
+        font-size: 12px;
+    }
+    .sponsor-row {
+        font-size: 12px;
+    }
+    .mentor-row {
+        font-size: 12px;
+    }
+
+}
 @media screen and (max-width: 768px) {
     #nme2 {
         font-size: 12px !important;
