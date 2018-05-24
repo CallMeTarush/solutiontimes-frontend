@@ -107,8 +107,52 @@ tr:hover {
     background: #EAE9E9;
 
 }
+.cross {
+    cursor: pointer;
+    text-align: right;
+    font-size: 40px;
+}
+/* overlay */
+.hidden {
+    display:none;
+}
+.solution-overlay {
+    position: fixed; /* Sit on top of the page content */
+    /* display: none; */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+}
+.inner-overlay {
+    background: white !important;
+    width: 50%;
+    height: 80%;
+    overflow-y: scroll;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2rem;
+    color: grey;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    z-index: 999;
+    box-shadow: 0.4px 0.9px 2px 0px rgba(0, 0, 0, 0.13);
+}
+.input-group-overlay {
+    margin-top: 2%;
+}
+#overlay-inputs {
+    font-size: 2rem;
+}
+/* end overlay */
 .submit {
     margin-top: 7%;
+    margin-right: 2%;
     padding: 2%;
     border: 0;
     background: #F1BC10;
@@ -119,7 +163,19 @@ tr:hover {
     font-stretch: normal;
     line-height: 1.57;
     letter-spacing: normal;
-    text-align: left;
+    color: #ffffff;
+}
+.submit-sol {
+    padding: 1% 2%;
+    margin-top: 2%;
+    border: 0;
+    background: #F1BC10;
+    font-family: BrandonText;
+    font-size: 2rem;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
     color: #ffffff;
 }
 .batch-16 {
@@ -137,6 +193,11 @@ hr {
     background: white;
     font-size: 28px;
     padding: 5px 20px;
+}
+@media screen and (max-width: 768px) {
+    .inner-overlay {
+        width: 95%;
+    }
 }
 @media screen and (max-width: 1300px) {
     .title-challenge {
@@ -190,4 +251,7 @@ hr {
     .view {
         font-size: 12px;
     }
+}
+tbody {
+    transition: all .5s linear;
 }

@@ -41,7 +41,7 @@ class App extends React.Component {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <div className="form-container col-md-8 col-md-offset-2">
+                        <div className="form-container col-md-10 col-md-offset-1">
 
                              <h1>Leave us a message </h1>
     

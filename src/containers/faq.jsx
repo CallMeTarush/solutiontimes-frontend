@@ -18,7 +18,7 @@ class App extends React.Component {
 
     componentWillMount() {
         
-        axios.get('http://139.59.13.187:8000/faqs')
+        axios.get(window.api + 'faqs')
             .then(({ data }) => {
                 console.log(data);
                 // this.state.problemstatements = data;

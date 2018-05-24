@@ -1,31 +1,78 @@
 import React from 'react';
 import '../css/header.css';
 
+import axios from 'axios'
 import Navigation from '../navigation.js';
 import Main from '../main.js';
-import getLoggedIn from './variables'
+import {getLoggedIn} from './variables'
 
-import { BrowserRouter as Router, Route } from "react-router-dom"
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from "react-bootstrap"
 // import 'bootstrap/dist/css/bootstrap.css';
+
+
+import api from '../api'
 
 class App extends React.Component {
 
     constructor() {
       super();
       this.state = {
-        user: []
+        user: [],
+        redirect: false
       };
 
-      this.getUser = this.getUser.bind(this)
-      this.getUser();
+      this.getName = this.getName.bind(this)
     }
-    getUser() {
+    getName() {
+      console.log(sessionStorage.getItem('userKey'))
       
+      if( sessionStorage.getItem('isLoggedin') === "1" ) 
+        return(this.state.user.name)
+      else
+        return(undefined)
+    }
+    componentWillMount() {
+
+      if( sessionStorage.getItem('isLoggedin') === "1" ) {
+        var User = JSON.parse (sessionStorage.getItem('user'));
+
+        this.setState({
+          user: User
+        })
+      }
+    }
+
+    handleSelect = (selectedKey) => {
+      console.log(selectedKey)
+    }
+
+    handleLogout = () => {
+      var nis = this;
+      axios.get(window.api + 'rest-auth/logout/')
+      .then(({ data }) => {
+          
+          console.log("lol")
+          if(data.detail == "Successfully logged out." ) {
+            
+            sessionStorage.setItem('isLoggedin', "0")
+            sessionStorage.setItem('userKey', undefined)
+            sessionStorage.setItem('user', undefined)
+            
+            nis.setState({ redirect: true })
+
+          }
+        } 
+      );
     }
 
     render() {
+      if(this.state.redirect)  {
+        window.location.href = "/";
+      }
+      else {
+
+      
       return (
 
         <div>
@@ -37,40 +84,47 @@ class App extends React.Component {
                 </Navbar.Brand>
                 <Navbar.Toggle />
               </Navbar.Header>
-              <Navbar.Collapse>
+              <Navbar.Collapse activeKey="1" onSelect={k => this.handleSelect(k)} >
                 
                 <Nav>
-                  <NavItem eventKey={1} href="#">
+                  <NavItem eventKey="1" href="#">
                     <NavLink to='/'>
                       Home
                     </NavLink>
                   </NavItem>
-                  <NavItem eventKey={2} href="#">
+                  <NavItem eventKey="2" href="#">
                     Student2Society
                   </NavItem>
-                  <NavItem eventKey={3} href="#">
+                  <NavItem eventKey="3" href="#">
                     <NavLink to='/faq'>
                       FAQ
                     </NavLink>
                   </NavItem>
-                  <NavItem eventKey={4} href="#">
+                  <NavItem eventKey="4" href="#">
                     <NavLink to='/contact'>
                       Contact Us
                     </NavLink>
                   </NavItem>
                 </Nav>
-        
-                <Nav pullRight>
-                  { sessionStorage.getItem('userKey') ? (
-                    <NavItem eventKey={1} href="#">
-                      Hello, 
-                    </NavItem>                  
+
+                  {console.log(sessionStorage.getItem('userKey')) }
+                  { sessionStorage.getItem('userKey') == "undefined" ? (
+                    <Nav pullRight>
+                      <NavItem eventKey="7">
+                        <NavLink to='/login'>
+                          Sign in
+                        </NavLink>
+                      </NavItem>                                      
+                    </Nav>    
                   ) : (
-                    <NavItem eventKey={1} href="#">
-                      Login or Sign Up
-                    </NavItem>                                      
+                    <Nav pullRight>
+                      <NavItem eventKey="5" onClick={() => {this.handleLogout()}} >
+                        Logout
+                      </NavItem>
+                    </Nav>    
+                    
                   )}
-                </Nav>
+                
               </Navbar.Collapse>
             </Navbar>
               {/* <Navigation /> */}
@@ -79,6 +133,7 @@ class App extends React.Component {
           
         </div>
       );
+    }
    }
 }
 

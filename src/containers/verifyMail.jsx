@@ -5,8 +5,6 @@ import axios from 'axios'
 import { PulseLoader } from 'react-spinners'
 import { browserHistory } from 'react-router';
 
-import isLoggedIn from '../components/variables'
-
 import '../css/home.css'
 
 class App extends React.Component {
@@ -23,7 +21,7 @@ class App extends React.Component {
         var nis = this;
         var key = this.props.match.params.id;
 
-        axios.post('http://127.0.0.1:8000/rest-auth/registration/verify-email/', {
+        axios.post(window.api + 'rest-auth/registration/verify-email/', {
             key: key
         })
         .then( function (response) {
@@ -39,7 +37,6 @@ class App extends React.Component {
             <div>
                 <div className="absolute-center" >   
                     <h1> Oh, Hi! </h1>
-                    {console.log(isLoggedIn)}
                     <center>
                         <PulseLoader
                             color={'#F7BF1E'} 

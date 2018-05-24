@@ -26,9 +26,10 @@ class App extends React.Component {
     render() {
         
         var video_link = this.state.youtube.concat(this.props.youtube);
+        
         console.log(video_link);
-
         console.log(this.props.height);
+        
         var matchHeight = {
             color: 'black'
         }
@@ -40,8 +41,8 @@ class App extends React.Component {
         }
 
         return (
-        <div>       
-            <NavLink to={`/challenge/${this.props.id}`}>
+            <div>       
+                <NavLink to={`/challenge/${this.props.id}`}>
                     <div className="col col-lg-3 col-sm-6 col-xs-12 big-challenge" >
                         <div className="category"> Domain: {this.props.domain} </div>
                         <div className="challenge" style={matchHeight} id={this.props.id}>
@@ -55,8 +56,8 @@ class App extends React.Component {
                             <span className="date"> {this.props.date} </span>
                         </div>
                     </div>
-            </NavLink>         
-        </div>
+                </NavLink>         
+            </div>
         );  
     }
 }

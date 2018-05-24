@@ -5,7 +5,7 @@ import '../css/input.css';
 import axios from 'axios';
 import ProblemStatement from '../components/problemstatement'
 import Header from '../components/header'
-import getLoggedIn from '../components/variables'
+import getLoggedIn from '../components/variables.js'
 
 import { DropdownButton,MenuItem } from 'react-bootstrap'
 import { PulseLoader } from 'react-spinners'
@@ -19,7 +19,6 @@ import 'react-dropdown/style.css'
 
 var QUERY_LENGTH;
 
-getLoggedIn();
 
 class App extends React.Component {
   
@@ -33,7 +32,8 @@ class App extends React.Component {
     selectValue: 'all',
     addClass: '1',
     height: -69,
-    loading: true
+    loading: true,
+    user: []
   }
   
   
@@ -197,10 +197,18 @@ class App extends React.Component {
   componentWillMount() {
     
     var data_problemstatements;
-    
+    if( sessionStorage.getItem('isLoggedin') === "1" ) {
+      var nis = this;
+
+      var User = JSON.parse (sessionStorage.getItem('user'));
+
+      nis.setState({
+        user: User
+      })
+    }
     this.updateDimensions();
     
-    axios.get('http://139.59.13.187:8000/problemstatements')
+    axios.get(window.api + 'problemstatements')
       .then(({ data }) => {
         console.log(data);
         // this.state.problemstatements = data;
@@ -234,7 +242,14 @@ class App extends React.Component {
         // if you are using ES2015 I'm pretty sure you can do this: this.setState({width, height});
   }
 
-  
+  getName = () => {
+    console.log(sessionStorage.getItem('userKey'))
+
+    if( sessionStorage.getItem('isLoggedin') === "1" ) 
+      return( <h1> Hi, {this.state.user.name}! </h1>)
+    else
+      return(null)
+  }
   render() {   
     console.log(this.state.selectValue);
     let challengeClass = ["choice choice-block col-xs-6 col-sm-2"];
@@ -252,7 +267,7 @@ class App extends React.Component {
 
     return (      
       <div>
-        <Header />  
+        <Header {...this.props} />  
         <div className="sorter col-md-12">
             <span className={challengeClass.join(' ')} onClick={() => {this.toggle(1)}} >Challenges</span>          
             <span className={domainClass.join(' ')} onClick={() => {this.toggle(2)}} > 
@@ -269,7 +284,9 @@ class App extends React.Component {
             </span>          
           </div>          
         <div className="container-div">          
-
+          <div className="col-md-12">
+            {this.getName() }
+          </div>
           <div className="the-bar">
             <form className="search-bar col-sm-6">
               <input

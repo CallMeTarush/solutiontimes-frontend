@@ -1,3 +1,2 @@
-function get_api() {
-    return('http://139.59.13.187:8000/');
-}
+
+window.api = 'http://127.0.0.1:8000/'

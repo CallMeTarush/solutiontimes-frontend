@@ -78,7 +78,9 @@
   color: #e3e3e3;
   
   }
-
+input {
+  padding-bottom: 0 !important;
+}
   .container-contact .form-control::-moz-placeholder {
   font-size: 18px;
   font-weight: normal;

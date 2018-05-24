@@ -59,3 +59,7 @@
 .no-display {
     display:none;
 }
+.custom-head {
+    width: 25% !important;
+    font-size: 17px !important;
+}

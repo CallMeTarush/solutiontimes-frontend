@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { Button, div, Form, FormControl, FormGroup } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom'
 
+import FaClose from 'react-icons/lib/fa/close'
 import axios from 'axios'
 import '../css/login.css'
 
@@ -18,22 +20,34 @@ export default class Login extends Component {
     handleSubmit(event) {
 
         var nis = this;
-
-        const username = findDOMNode(this.refs.username)
+        console.log(event);
+        const email = findDOMNode(this.refs.email)
         const password = findDOMNode(this.refs.password)
-        const creds = { username: username.value.trim(), password: password.value.trim()}
+        const creds = { email: email.value, password: password.value}
         console.log(creds);
 
-        // axios.post('http://127.0.0.1:8000/rest-auth/login/', creds)
-        // .then( function (response) {
+        axios.post( window.api + 'rest-auth/login/', creds)
+        .then( function (response) {
             
-        //     sessionStorage.setItem('userKey', response.data.key);
+            sessionStorage.setItem('userKey', response.data.key);
 
-        //     if(response.status == 200) {
-        //         nis.props.history.push('/') 
-        //     }
+            if(response.status == 200) {
+                var user;
 
-        // })
+                sessionStorage.setItem('isLoggedin', "1" )
+                
+                axios.get(window.api + 'rest-auth/user/', { headers: { "Authorization": "Token " + sessionStorage.getItem('userKey') } } )
+                    .then((data) => {
+                        
+                        user = data.data;
+                        sessionStorage.setItem('user', JSON.stringify(user));
+                        nis.props.history.push('/');
+                    }
+                );
+            
+            }
+
+        })
 
         nis.state.errorMessage = "Invalid username and password" ;
         nis.forceUpdate();
@@ -41,6 +55,9 @@ export default class Login extends Component {
 
     render() {
         
+        if(sessionStorage.getItem('isLoggedin') == "1" ) {
+            window.location.href="/"
+        }
         
         return (
             <div className="login-container " >
@@ -55,7 +72,7 @@ export default class Login extends Component {
                         
                         <FormGroup controlId="formHorizontalUsername">                        
                             <div className="control-label" id="first" > Username or email address </div>
-                            <FormControl type="username" ref="username" className="login-input col-md-12" onChange={this.handleChange} />
+                            <FormControl type="email" ref="email" className="login-input col-md-12" onChange={this.handleChange} />
                         </FormGroup>
                         &nbsp;&nbsp;
                         
@@ -69,10 +86,10 @@ export default class Login extends Component {
                             <a href="/forgotpassword" >Forgot your password?</a>
                         </div>
 
-                        <Button className="signin col-xs-12" > SIGN IN  </Button>
+                        <Button className="signin col-xs-12" onClick={(e) => this.handleSubmit(e)} > SIGN IN  </Button>
                         
                         <div className="signup col-md-12 text-center">
-                            Don't have an account? <a href="/signup">Sign up</a>
+                            Don't have an account? <NavLink to="/register"> Sign up</NavLink>
                         </div>
                     </div>
                 </Form>

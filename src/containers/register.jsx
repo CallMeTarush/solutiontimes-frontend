@@ -17,13 +17,39 @@ export default class Login extends Component {
     constructor() {
         super();
         this.state = ({
-            errorMessage: '',
-            date: new Date()
+            errorMessages: [],
+            date: new Date(),
+            is_participant: true,
+            is_mentor: false,
+            is_sponsor: false,
+            is_end_user: false
         })
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.toggle = this.toggle.bind(this);
     }
 
     onChange = date => this.setState({ date })
+
+    toggle(x) {
+        switch(x) {
+            case 0:
+                this.setState({ is_participant: true })
+                break;
+            case 1:
+                this.setState({ is_mentor: true })
+                break;
+            case 2:
+                this.setState({ is_sponsor: true })
+                break;
+            case 3:
+                this.setState({ is_end_user: true })
+                break;
+        }
+    }
+
+    componentWillUnmount() {
+
+    }
 
     handleSubmit(event) {
 
@@ -47,17 +73,30 @@ export default class Login extends Component {
         dob = month + "/" + dob[2] + "/" + dob[3];
         dob = moment(dob).format('YYYY-MM-DD');
         
-        const creds = { name: name.value.trim(), password1: password1.value.trim(), password2: password2.value.trim(), email: email.value.trim(), college: college.value.trim(), dob: dob }
+        const creds = { 
+            name: name.value.trim(),
+            password1: password1.value.trim(),
+            password2: password2.value.trim(),
+            email: email.value.trim(),
+            college: college.value.trim(),
+            date_of_birth: dob ,
+            is_participant: this.state.is_participant,
+            is_mentor: this.state.is_mentor,
+            is_sponsor: this.state.is_sponsor,
+            is_end_user: this.state.is_end_user
+        }
         
         if(password1.value === password2.value ) {
-            axios.post('http://localhost:8000/rest-auth/registration/', creds)
+            axios.post( window.api + 'rest-auth/registration/', creds)
             .then( function (response) {            
-                sessionStorage.setItem('userKey', response.data.key);
-                console.log(response)
+                if(response.status == 201) {
+                    alert("Success")
+                    window.location.href="/login"
+                }
             })
         }
         else {
-            console.log("lmao");
+            alert("Match password fields")
         }
     }
 
@@ -71,6 +110,7 @@ export default class Login extends Component {
                         <ControlLabel>Email</ControlLabel>
                         <FormControl type="email" ref="email" onChange={this.handleChange} placeholder="Email" />
                     </FormGroup>
+                    {/* { this.state.errorMessage[0] } */}
                     <br />
                     
                     <FormGroup controlId="formHorizontalPassword">
@@ -98,13 +138,48 @@ export default class Login extends Component {
                     <br />
 
                     <FormGroup controlId="formHorizontalDOB">
-                        <ControlLabel >DOB</ControlLabel> <br />
+                        <ControlLabel >Date Of Birth</ControlLabel> <br />
                         <DatePicker dateFormat="DD/MM/YYYY" onChange={this.onChange} value={this.state.date} />
                     </FormGroup>
-                    <br />
                     
+                    <ControlLabel >Do you want to register as..?</ControlLabel>
+                    <br />
+                    <table>
+                        <thead>
+                            <th className="custom-head" className="custom-head" >
+                                Contestant
+                            </th>
+                            <th className="custom-head">
+                                Mentor
+                            </th>
+                            <th className="custom-head">
+                                Sponsor
+                            </th>
+                            <th className="custom-head">
+                                End-user()
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" checked={this.state.is_participant} onChange={() => {this.toggle(0)}}/>
+                                </td>
+                                <td>
+                                    <input type="checkbox" checked={this.state.is_mentor} onChange={() => {this.toggle(1)}}/>
+                                </td>
+                                <td>
+                                    <input type="checkbox" checked={this.state.is_sponsor} onChange={() => {this.toggle(2)}}/>
+                                </td>
+                                <td>
+                                    <input type="checkbox" checked={this.state.is_end_user} onChange={() => {this.toggle(3)}}/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>     
+                    <br />
                     <Button onClick={(event) => this.handleSubmit(event)}>Register</Button>
-
+                    <br />
+                    <br />
                 </Form>
             </div>
         )
