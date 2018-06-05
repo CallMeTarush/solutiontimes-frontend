@@ -78,12 +78,7 @@ class App extends React.Component {
         <div>
           <div>
             <Navbar collapseOnSelect>
-              <Navbar.Header>
-                <Navbar.Brand>
-                  <a href="#brand">Logo</a>
-                </Navbar.Brand>
-                <Navbar.Toggle />
-              </Navbar.Header>
+            
               <Navbar.Collapse activeKey="1" onSelect={k => this.handleSelect(k)} >
                 
                 <Nav>

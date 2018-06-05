@@ -13,8 +13,11 @@
     margin: 0;
 }
 #select {
-    background: white !important;
+    background: #f5f5f5 !important;
     border: 0 !important;
+}
+.selected #select {
+    background: #fff !important;
 }
 .search-bar {
     font-family: BrandonText;
@@ -170,7 +173,7 @@
         margin-top: 2em;
     }
     .choice {
-        font-size: 1em;
+        font-size: 1em !important;
     }
 }
 @media screen and (max-width: 769px) {
