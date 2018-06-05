@@ -165,6 +165,11 @@
     }
 
 }
+@media only screen and (max-width: 1366px) and (min-width: 1000px)  {
+    .the-bar {
+        margin-top: 2em;
+    }
+}
 @media screen and (max-width: 769px) {
     .actual-search {
         font-size: 16px;

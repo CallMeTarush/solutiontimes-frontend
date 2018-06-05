@@ -34,3 +34,24 @@ input {
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: #CEC9CB;
 }
+@media only screen and (max-width: 1366px) and (min-width: 768px)  {
+  input {
+    font-size: 1rem;
+  }
+  #nme {
+    min-height: 25px;
+  }
+  .glyphicon {
+    font-size: 0.8em;
+    vertical-align: middle;
+  }
+  .search-adv {
+    font-size: 1em;
+  }
+  .top-m select {
+    padding: 0.2em;
+  }
+  .loader {
+    margin-top: 2em;
+  }
+}

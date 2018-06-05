@@ -378,7 +378,7 @@ class App extends React.Component {
               <PulseLoader
                   color={'#01426a'} 
                   loading={this.state.loading} 
-                  size={25}
+                  size={15}
                 />
             </center>
             )
