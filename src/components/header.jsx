@@ -93,7 +93,9 @@ class App extends React.Component {
                     </NavLink>
                   </NavItem>
                   <NavItem eventKey="2" href="#">
-                    Student2Society
+                    <NavLink to='/student2society'>
+                      Student2Society
+                    </NavLink>
                   </NavItem>
                   <NavItem eventKey="3" href="#">
                     <NavLink to='/faq'>
@@ -108,11 +110,15 @@ class App extends React.Component {
                 </Nav>
 
                   {console.log(sessionStorage.getItem('userKey')) }
-                  { sessionStorage.getItem('userKey') == "undefined" ? (
+                    {sessionStorage.getItem('userKey') == "undefined" || !sessionStorage.getItem('userKey') ? (
                     <Nav pullRight>
-                      <NavItem eventKey="7">
+                      <NavItem eventKey="7"  >
                         <NavLink to='/login'>
-                          Sign in
+                          <div>
+                            <span className="login-button">
+                              Login
+                            </span>
+                          </div>
                         </NavLink>
                       </NavItem>                                      
                     </Nav>    

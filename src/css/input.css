@@ -1,10 +1,12 @@
 input {
   background: #F5F3F9;
   border: 0;
-  font-size: 4rem;
+  font-size: 2rem;
 }
-.search-icon {
-  font-size: 4rem;
+#nme {
+  border-left: solid #01426a 0.3em;
+  min-height: 40px;
+  padding: 0 1%;
 }
 .question {
   width: 100% !important;

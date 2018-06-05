@@ -1,6 +1,6 @@
 .navbar {
-    background: #F7BF1E !important;
-    color: #754500 !important;    
+    background: #01426a !important;
+    color: white !important;    
     margin-bottom: 0;
 
     font-size: 19px;
@@ -9,6 +9,10 @@
     font-stretch: normal;
     line-height: 1.11;
     letter-spacing: normal;
+}
+a {
+    color: white;
+    font-weight: bold;
 }
 .navbar-brand {
     line-height: 80px;
@@ -34,4 +38,10 @@
         padding-top: 10px;
         padding-bottom: 10px;
     }
+}
+.login-button {
+    background: white;
+    color: #01426a !important;
+    padding: 20%;
+    border-radius: 17.5px;
 }

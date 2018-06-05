@@ -9,7 +9,6 @@ import getLoggedIn from '../components/variables.js'
 
 import { DropdownButton,MenuItem } from 'react-bootstrap'
 import { PulseLoader } from 'react-spinners'
-
 import FaSearch from 'react-icons/lib/fa/search'
 import FaAngleDown from 'react-icons/lib/fa/angle-down'
 
@@ -33,7 +32,8 @@ class App extends React.Component {
     addClass: '1',
     height: -69,
     loading: true,
-    user: []
+    user: [],
+    searching: false
   }
   
   
@@ -52,15 +52,21 @@ class App extends React.Component {
   getInfo = () => {
 
     var p = this.state.problemstatements;
-    
-    if( QUERY_LENGTH == 0 ) {
+    console.log(QUERY_LENGTH)
+    if( QUERY_LENGTH < 2 ) {
       
+      while(this.state.queriedstatements.length > 0) {
+        this.state.queriedstatements.pop();
+      }
+
       for( var key in p ) {
         this.state.queriedstatements.push(key);
       }
+      this.forceUpdate();
     }
 
     else {
+
       while(this.state.queriedstatements.length > 0) {
         this.state.queriedstatements.pop();
       }
@@ -69,14 +75,15 @@ class App extends React.Component {
       for( var key in p) {
         
         var title = p[key].title;
-
-        if(title.search(this.state.query)!=-1) {
+        title = title.toLowerCase();
+        if(title.search(this.state.query.toLowerCase() )!=-1) {
         
           this.state.queriedstatements.push(key);
 
         }
         console.log(this.state.queriedstatements);
       }
+      this.forceUpdate();
     }
 
     
@@ -108,9 +115,10 @@ class App extends React.Component {
   handleInputChange = () => {
     
     QUERY_LENGTH = this.search.value.length;
-
+    
     this.setState({
-      query: this.search.value
+      query: this.search.value,
+      searching: true
     }, () => {              
       this.getInfo()        
     })
@@ -287,7 +295,9 @@ class App extends React.Component {
           <div className="col-md-12">
             {this.getName() }
           </div>
-          <div className="the-bar">
+          <div className="the-bar col-md-12 row">
+
+
             <form className="search-bar col-sm-6">
               <input
                 placeholder="Search"
@@ -297,20 +307,76 @@ class App extends React.Component {
                 className="question"
                 id="nme" required autoComplete="off" 
               />          
+              <i className="glyphicon glyphicon-search form-control-feedback"></i>
+
+              
             </form>
-            {/* <div className="search-icon col-sm-1 col-xs-2 text-center">
-              <div className="actual-search">
-                <FaSearch />
-              </div>
-            </div> */}
           </div>
+          { true ? 
+            <div className="col-md-12 row text-center top-m " > 
+              <div className="search-adv">
+                Sort by &nbsp;&nbsp;
+                <select >
+                  <option>
+                    Relevant
+                  </option>
+                </select>
+              </div>
+              <br className="br-mob" />
+              <div className="search-adv">
+                Duration&nbsp;&nbsp;
+                <select>
+                  <option>
+                    Any
+                  </option>
+                  <option>
+                    Short
+                  </option>
+                  <option>
+                    Medium
+                  </option>
+                  <option>
+                    Long
+                  </option>
+                </select>
+              </div>
+              <br className="br-mob" />
+              <div className="search-adv">
+                Uploaded &nbsp;&nbsp;
+                <select>
+                  <option>
+                    All time
+                  </option>
+                  <option>
+                    Today
+                  </option>
+                  <option>
+                    Last week
+                  </option>
+                  <option>
+                    Last month
+                  </option>
+                  <option>
+                    Last year
+                  </option>
+                  <option>
+                    Older
+                  </option>
+                </select>
+              </div>
+              <br className="br-mob" />
+            </div>
+            :
+            <div></div>
+          }
+
           <div className="problemstatements col-md-12">
 
             
             { this.state.loading ? (
             <center className="loader" >  
               <PulseLoader
-                  color={'#F7BF1E'} 
+                  color={'#01426a'} 
                   loading={this.state.loading} 
                   size={25}
                 />

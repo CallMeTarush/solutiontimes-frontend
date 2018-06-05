@@ -44,7 +44,7 @@ class App extends React.Component {
             <div>       
                 <NavLink to={`/challenge/${this.props.id}`}>
                     <div className="col col-lg-3 col-sm-6 col-xs-12 big-challenge" >
-                        <div className="category"> Domain: {this.props.domain} </div>
+                        {/* <div className="category"> Domain: {this.props.domain} </div> */}
                         <div className="challenge" style={matchHeight} id={this.props.id}>
                             
                             <ResponsiveEmbed src={video_link} allowFullScreen />
