@@ -261,7 +261,7 @@ class App extends React.Component {
   render() {   
     console.log(this.state.selectValue);
     let challengeClass = ["choice choice-block col-xs-6 col-sm-2"];
-    let domainClass = ["choice choice-select col-xs-6 col-sm-2"];
+    let domainClass = ["choice choice-block col-xs-6 col-sm-2"];
 
     if(this.state.addClass == "2") {
       domainClass.push("selected");
