@@ -42,7 +42,7 @@
 .choice {
     display: table-cell;
     font-family: BrandonText;
-    font-size: 15px !important;
+    font-size: 15px;
     font-weight: normal !important;
     font-style: normal !important;
     font-stretch: normal !important;
@@ -168,6 +168,9 @@
 @media only screen and (max-width: 1366px) and (min-width: 1000px)  {
     .the-bar {
         margin-top: 2em;
+    }
+    .choice {
+        font-size: 1em;
     }
 }
 @media screen and (max-width: 769px) {
