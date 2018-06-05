@@ -24,6 +24,12 @@ a {
     padding-bottom: 0px;
     line-height: 80px;
 }
+.nav a:hover {
+    color: White !important;
+}
+a.active {
+    text-decoration: underline;
+}
 @media (max-width: 767px) {
     .navbar-nav > li > a {
     line-height: 20px;

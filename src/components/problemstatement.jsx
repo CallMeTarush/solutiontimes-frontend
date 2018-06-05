@@ -48,7 +48,7 @@ class App extends React.Component {
                         <div className="challenge" style={matchHeight} id={this.props.id}>
                             
                             <ResponsiveEmbed src={video_link} allowFullScreen />
-                            <div className="title"> <b> {this.props.title} </b> </div>
+                            <div className="title"> {this.props.title} </div>
                             
                         </div>
                         <div className="details">

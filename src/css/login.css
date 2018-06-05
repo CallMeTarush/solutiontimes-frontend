@@ -27,7 +27,7 @@
 
 }
 .login {
-    font-family: BrandonText;
+    font-family: circular;
     font-size: 21px;
     font-weight: normal;
     font-style: normal;
@@ -40,7 +40,7 @@
     padding-bottom: 2%;
 }
 .control-label {
-    font-family: BrandonText;
+    font-family: circular;
     font-size: 17px;
     font-weight: normal;
     font-style: normal;
@@ -62,7 +62,7 @@ input.login-input, textarea {
     border-radius: 7px;
     background-color: #fdbd39;
 
-    font-family: BrandonText;
+    font-family: circular;
     font-size: 21px;
     font-weight: bold;
     font-style: normal;

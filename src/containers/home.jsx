@@ -33,7 +33,9 @@ class App extends React.Component {
     height: -69,
     loading: true,
     user: [],
-    searching: false
+    searching: false,
+    selectValueDuration: 'Any',
+    selectValueTime: 'All time'
   }
   
   
@@ -62,7 +64,7 @@ class App extends React.Component {
       for( var key in p ) {
         this.state.queriedstatements.push(key);
       }
-      this.forceUpdate();
+
     }
 
     else {
@@ -71,22 +73,23 @@ class App extends React.Component {
         this.state.queriedstatements.pop();
       }
 
-      
-      for( var key in p) {
-        
+      for( var key in p) {        
         var title = p[key].title;
+        
         title = title.toLowerCase();
         if(title.search(this.state.query.toLowerCase() )!=-1) {
-        
+
           this.state.queriedstatements.push(key);
 
         }
         console.log(this.state.queriedstatements);
       }
-      this.forceUpdate();
+
     }
 
-    
+    this.handleTime();
+    this.handleDuration();
+    this.forceUpdate();
   }
   
   initLoad = () => {
@@ -201,6 +204,89 @@ class App extends React.Component {
     }
 
   }
+
+  handleChangeDuration = (e) => {
+    this.state.selectValueDuration = e.target.value ;
+    this.getInfo();
+  }
+  handleDuration = () => {
+    var time = this.state.selectValueDuration
+    var p = this.state.problemstatements;
+    var probs = [];
+
+    for (var prop in p) {
+      
+      for(var key in this.state.queriedstatements) {
+
+        if(prop == this.state.queriedstatements[key]) {
+          
+          switch(time) {
+            case 'Short':
+              if( p[prop].is_short ) { probs.push(prop); }
+              break;
+            case 'Medium':
+              if( p[prop].is_medium ) { probs.push(prop); }
+              break;
+            case 'Long':
+              if( p[prop].is_long ) { probs.push(prop); }
+              break;
+            default:
+              probs.push(prop);
+          }
+        }
+      }   
+    }
+    
+    while(this.state.queriedstatements.length > 0) {
+      this.state.queriedstatements.pop();
+    }
+    this.state.queriedstatements= probs ;
+  }
+  handleChangeTime = (e) => {
+    this.state.selectValueTime = e.target.value;
+    this.getInfo();
+  }
+  handleTime = () => {
+    
+    var time = this.state.selectValueTime
+    var p = this.state.problemstatements;
+    var probs = [];
+
+    for (var prop in p) {
+      
+      for(var key in this.state.queriedstatements) {
+
+        if(prop == this.state.queriedstatements[key]) {
+          
+          switch(time) {
+            case 'Today':
+              if( p[prop].is_today ) { probs.push(prop); }
+              break;
+            case 'Last week':
+              if( p[prop].is_week ) { probs.push(prop); }
+              break;
+            case 'Last month':
+              if( p[prop].is_month ) { probs.push(prop); }
+              break;
+            case 'Last year':
+              if( p[prop].is_year ) { probs.push(prop); }
+              break;
+            case 'Older':
+              if( p[prop].is_older ) { probs.push(prop); }
+              break;
+            default:
+              probs.push(prop);
+          }
+        }
+      }   
+    }
+    
+    while(this.state.queriedstatements.length > 0) {
+      this.state.queriedstatements.pop();
+    }
+    this.state.queriedstatements= probs ;
+  }
+  
 
   componentWillMount() {
     
@@ -325,7 +411,7 @@ class App extends React.Component {
               <br className="br-mob" />
               <div className="search-adv">
                 Duration&nbsp;&nbsp;
-                <select>
+                <select defaultValue={this.state.selectValueDuration} onChange={this.handleChangeDuration} >
                   <option>
                     Any
                   </option>
@@ -343,7 +429,7 @@ class App extends React.Component {
               <br className="br-mob" />
               <div className="search-adv">
                 Uploaded &nbsp;&nbsp;
-                <select>
+                <select defaultValue={this.state.selectValueTime} onChange={this.handleChangeTime} >
                   <option>
                     All time
                   </option>

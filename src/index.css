@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'brandonText';
+  font-family: 'circular';
   src: url('./css/brandon-text.ttf') format('truetype');
 }
 @font-face {
@@ -13,9 +13,12 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'brandonText';
+  font-family: 'circular';
   background: #fff;
 }
 html {
   height: 100%;
+}
+.loader {
+  margin-top: 2em;
 }

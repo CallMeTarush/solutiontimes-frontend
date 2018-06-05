@@ -4,7 +4,7 @@ input {
   font-size: 2rem;
 }
 #nme {
-  border-left: solid #01426a 0.3em;
+  border-left: solid #01426a 7px;
   min-height: 40px;
   padding: 0 1%;
 }
@@ -51,7 +51,5 @@ input {
   .top-m select {
     padding: 0.2em;
   }
-  .loader {
-    margin-top: 2em;
-  }
+  
 }

@@ -7,7 +7,7 @@
 
 }
 .container-div {
-    margin: 0 10%;
+    /* margin: 0 10%; */
 }
 #select {
     background: #f5f5f5 !important;
@@ -17,8 +17,9 @@
     background: #fff !important;
 }
 .search-bar {
-    font-family: BrandonText;
+    font-family: circular;
     padding: 0 !important;
+    margin-left: 15px;
 
 }
 .search-icon {
@@ -29,7 +30,7 @@
     box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important;
 }
 .problemstatements {
-    /* margin: 3% 0; */
+    padding: 0 8vw !important;
 }
 .the-bar {
     margin-top: 75px;
@@ -42,7 +43,7 @@
 .choice {
     display: table-cell;
     font-size: 20.7px;
-    font-family: BrandonText;
+    font-family: circular;
     font-weight: normal !important;
     font-style: normal !important;
     font-stretch: normal !important;
@@ -57,10 +58,14 @@
     width: 100%;
     background: #f5f5f5;
     box-shadow: -4px 0px 29px 0 rgba(0, 0, 0, 0.03);
-    padding: 0 calc(10% + 25px);
-    padding: 0 -moz-calc(10% + 25px);
-    padding: 0 -webkit-calc(10% + 25px);
-    padding: 0 -o-calc(10% + 25px);
+    padding: 0 calc(15px + 8vw) !important;
+    padding: 0 calc(15px + 8vw);
+    padding: 0 -moz-calc(15px + 8vw);
+    padding: 0 -webkit-calc(15px + 8vw);
+    padding: 0 -o-calc(15px + 8vw);
+}
+.col-md-12 {
+    padding: 0 ;
 }
 .top-m {
     margin-top: 2em;
@@ -73,6 +78,13 @@
 }
 .choice select {
     background: #f5f5f5 !important ;
+}
+.search-bar{
+    padding-left: calc(15px + 8vw) !important;
+    padding-left: calc(15px + 8vw);
+    padding-left: -moz-calc(15px + 8vw);
+    padding-left: -webkit-calc(15px + 8vw);
+    padding-left: -o-calc(15px + 8vw);
 }
 .top-m select {
     background: #01426a;
@@ -88,8 +100,22 @@
     padding: 16px;
     font-size: 16px;
     border: none;
+    
 }
 
+.nav a:first-child {
+    padding-left: 0;
+}
+.navbar .container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+    padding: 0 calc(15px + 8vw) !important;
+    padding: 0 calc(15px + 8vw);
+    padding: 0 -moz-calc(15px + 8vw);
+    padding: 0 -webkit-calc(15px + 8vw);
+    padding: 0 -o-calc(15px + 8vw);
+}
 .dropdown {
     position: relative;
     display: inline-block;
@@ -215,5 +241,7 @@
 }
 @media screen and (min-width: 768px){
     .br-mob { display: none; }
-    
+    .navbar-collapse {
+        padding: 0 !important;
+    }
 }
