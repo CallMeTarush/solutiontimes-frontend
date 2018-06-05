@@ -1,5 +1,5 @@
 .title {
-    
+    margin: 10px 0; 
     font-family: BrandonText;
     font-size: 1.4rem;
     font-weight: normal;
@@ -8,7 +8,6 @@
     letter-spacing: normal;
     text-align: left;
     color: #000000;
-    padding: 0 3.3%;
 }
 .contestants {
     float: left;
