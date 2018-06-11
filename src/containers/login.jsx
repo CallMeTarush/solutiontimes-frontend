@@ -3,6 +3,8 @@ import { findDOMNode } from 'react-dom';
 import { Button, div, Form, FormControl, FormGroup } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom'
 
+import plane from '../img/Plane.png'
+import Header from '../components/header'
 import FaClose from 'react-icons/lib/fa/close'
 import axios from 'axios'
 import '../css/login.css'
@@ -12,7 +14,8 @@ export default class Login extends Component {
     constructor() {
         super();
         this.state = ({
-            errorMessage: ''
+            errorMessage: '',
+            loginHeight: 0
         })
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -52,19 +55,33 @@ export default class Login extends Component {
         nis.state.errorMessage = "Invalid username and password" ;
         nis.forceUpdate();
     }
-
+    componentDidMount() {
+        const loginHeight = document.getElementById('form-login').clientHeight;
+        this.setState({loginHeight})
+    }
     render() {
         
         if(sessionStorage.getItem('isLoggedin') == "1" ) {
             window.location.href="/"
         }
-        
+        let loginformClass = ["col-md-4 login-form-container "];
+        // var formHeight = document.getElementById("form-login").offsetHeight;
+        console.log("formheight" + this.state.loginHeight)
+        const setHeight = {
+            marginTop: `calc( 50vh - 40px - ${this.state.loginHeight/2}px )`
+        }
         return (
+            <div>
+                <Header />
             <div className="login-container " >
                 <div className="bg-bottom"></div>
-                <Form className="login-form" >
+                <div class="login-image col-md-4">
+                    <img src={plane} alt={"plane"}/> 
+                </div>
+                <div className={loginformClass.join(' ')} style={setHeight} >
+                <Form className="login-form col-md-12" id="form-login" >
 
-                    <div className="theloginform">
+                    <div className="theloginform" >
 
                         <div className="login text-center">
                             LOGIN 
@@ -93,7 +110,9 @@ export default class Login extends Component {
                         </div>
                     </div>
                 </Form>
+                </div>
             </div>
+        </div>
         )
     }
 }

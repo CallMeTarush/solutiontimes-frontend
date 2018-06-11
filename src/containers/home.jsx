@@ -332,8 +332,6 @@ class App extends React.Component {
 
         this.state.height = -69;
         this.forceUpdate();
-        
-        // if you are using ES2015 I'm pretty sure you can do this: this.setState({width, height});
   }
 
   getName = () => {
