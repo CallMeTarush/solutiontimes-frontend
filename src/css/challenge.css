@@ -11,21 +11,28 @@
 }
 .challenge-content {
     /* padding: 0 15%; */
-    margin-top: 5%;
+    padding-top: 5%;
+    background: #F9F9F9;
 }
 .challenge-video {
     padding: 2% 7%;
     padding-top: 5%;
     
     background: white;
-    box-shadow: 0.4px 0.9px 2px 0px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 0 17.6px 0.4px rgba(0, 0, 0, 0.08);
+
     
 }
 .challenge-people {
     background: white;
     padding: 5%;
     margin-bottom: 10px;
-    box-shadow: 0.4px 0.9px 2px 0px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 0 17.6px 0.4px rgba(0, 0, 0, 0.08);
+    font-size: 1.2em;
+
+}
+.people-title {
+    font-weight: bold;
 }
 table {
     width: 100%;
@@ -43,6 +50,9 @@ table {
 }
 .details-challenge {
     font-size:16px;
+}
+.video-container {
+    padding-left: 5%;
 }
 .contestant-row {
     width: 25%;
@@ -63,9 +73,16 @@ table {
 .mentor-row {
     width: 25%;
 }
+.tablesearch.input.empty {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
 .table-search {
     width:100%;
-    padding: 1% 2.3%;
+    padding: 6px 23px;
+
     background: #F5F5F5;
     margin: 0;
     box-shadow: 0 !important;
@@ -103,9 +120,18 @@ tr:hover {
     width: 50%;
 }
 .selected-category {
-    color: #8cbded;
+    
     background: #EAE9E9;
+    font-family: circular;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    background: #133A6C;
+    color: #ffffff;
 
+}
+.challenge-video:nth-child(2) {
+    padding: 0;
 }
 .cross {
     cursor: pointer;
@@ -141,7 +167,8 @@ tr:hover {
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     z-index: 999;
-    box-shadow: 0.4px 0.9px 2px 0px rgba(0, 0, 0, 0.13);
+    box-shadow: 0 0 17.6px 0.4px rgba(0, 0, 0, 0.08);
+
 }
 .input-group-overlay {
     margin-top: 2%;
@@ -153,15 +180,18 @@ tr:hover {
 .submit {
     margin-top: 7%;
     margin-right: 2%;
-    padding: 2%;
-    border: 0;
-    background: #F1BC10;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+
+    border-radius: 5px;
+    background-image: linear-gradient(176deg, #2fbf50, #279440);
+    box-shadow: 0 0 1.5px 0.5px;
+
     font-family: circular;
-    font-size: 21px;
+    font-size: 1.4em;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
-    line-height: 1.57;
     letter-spacing: normal;
     color: #ffffff;
 }
@@ -192,7 +222,29 @@ hr {
 #nme2 {
     background: white;
     font-size: 28px;
-    padding: 5px 20px;
+    font-family: brandon;
+}
+.show-mobile {
+    display: none;
+}
+.show-not-mobile {
+    display:block;
+}
+.table-ka-head {
+    border: 0;
+}
+.table-ka-head:nth-child(2) {
+    border-left: solid 1px;
+    border-right: solid 1px;
+}
+
+@media screen and (max-width: 1000px) {
+    .show-not-mobile {
+        display: none;
+    }
+    .show-mobile {
+        display: block;
+    }
 }
 @media screen and (max-width: 768px) {
     .inner-overlay {

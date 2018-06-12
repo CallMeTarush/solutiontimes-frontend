@@ -1,5 +1,6 @@
 .login-container {
     background: #fff;   
+    padding: 0 10%;
     width: 100%;   
     height: calc(100vh - 80px) ; 
 }

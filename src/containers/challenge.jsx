@@ -31,7 +31,9 @@ class App extends React.Component {
             mentorShow: false,
             sponsorShow: false,
             youtube: "https://www.youtube.com/embed/",
-            checked: false
+            checked: false,
+            domain: '',
+            time_to_show: '',
         }
 
         this.toggle = this.toggle.bind(this);
@@ -55,7 +57,9 @@ class App extends React.Component {
             this.setState({
                 title: data.Problemstatement.title,
                 description: data.Problemstatement.description,
-                problemID: data.Problemstatement.id
+                problemID: data.Problemstatement.id,
+                domain: data.Problemstatement.domain,
+                time_to_show: data.Problemstatement.time_to_show
             })
             var video_id = data.Problemstatement.videolink.split('v=')[1];
             var ampersandPosition = video_id.indexOf('&');
@@ -307,9 +311,9 @@ class App extends React.Component {
     }
     render() {
 
-        let sponsorClass = [];
-        let contestClass = [];
-        let mentorClass = [];
+        let sponsorClass = ['table-ka-head'];
+        let contestClass = ['table-ka-head'];
+        let mentorClass = ['table-ka-head'];
     
         if(this.state.optionSelect == 0) {
             contestClass.push("selected-category");
@@ -332,11 +336,8 @@ class App extends React.Component {
                         <h1 className="title-challenge">{this.state.title}</h1>
                         <div className="details-challenge">{this.state.description}
 
-
-
                         </div>
-
-                        <div className="row text-center">
+                        <div className="row show-mobile text-center">
 
                             { sessionStorage.getItem('isLoggedin') === "1" ? 
                                 <div>
@@ -361,39 +362,69 @@ class App extends React.Component {
                         </div>
                     </div>
                     
-                    <div className="challenge-video the-info row batch-16">
+                    <div className="challenge-video the-info batch-16">
                         <table>
                             <thead>
                                 <th className={contestClass.join(' ')} onClick={() => {this.toggle(0)}} >Contestants</th>
                                 <th className={sponsorClass.join(' ')} onClick={() => {this.toggle(1)}} >Sponsors</th>
                                 <th className={mentorClass.join(' ')} onClick={() => {this.toggle(2)}} >Mentors</th>
                             </thead>
-                        </table>
+                        </table>                            
+                        <form className="col-xs-12 table-search">                                
+
                             
-                            <form className="search-bar col-xs-12 table-search">
-                                
-                                <input
-                                placeholder="Search"
-                                ref= {input => this.search = input}
-                                onChange={this.handleInputChange}
-                                type="text" 
-                                className="question"
-                                id="nme2" required autocomplete="off" 
-                                />          
-                            </form>
+                            <input
+                            placeholder="Q"
+                            ref= {input => this.search = input}
+                            onChange={this.handleInputChange}
+                            type="text" 
+                            className="question glyphicon"
+                            id="nme2" required autocomplete="off" 
+                            /> 
+         
+                        </form>
                         <table>                               
                             <tbody>
                                 {this.getRows()}
                             </tbody>
                         </table>
                     </div>
-                    <br />
+                    <br />                
                 </div>
-                <div className="col-md-3">
-                    <div className="challenge-people">
-                        Challenge details
-                    </div>                    
-                </div>
+                    <div className="col-md-3">
+                        <div className="challenge-people">
+                            <span className="people-title">Domain:</span> {this.state.domain} <br />
+                            <span className="people-title">Uploaded:</span> {this.state.time_to_show} <br />
+                            <span className="people-title">Contestants:</span> {this.state.contestants.length} <br />
+                            <span className="people-title">Sponsors:</span> {this.state.sponsors.length} <br />
+                            <span className="people-title">Mentors:</span> {this.state.mentors.length} <br />
+                        </div>                    
+                        <div className="show-not-mobile text-center">
+                            { sessionStorage.getItem('isLoggedin') === "1" ? 
+                                <div>
+                                    { JSON.parse(sessionStorage.getItem('user')).is_participant ? 
+                                        
+                                        <button className="submit col-md-8 col-md-offset-2 text-center" onClick={() => {this.setState({ solutionShow: !this.state.solutionShow }); }}>Submit a solution</button> :
+                                        <div></div>
+                                        
+                                    }
+                                    { JSON.parse(sessionStorage.getItem('user')).is_sponsor ? 
+                                        <button className="submit col-md-8 col-md-offset-2 text-center" onClick={() => {this.setState({ sponsorShow: !this.state.sponsorShow }); }}>Sponsor this challenge</button> :
+                                        <div></div>
+                                    }
+                                    { JSON.parse(sessionStorage.getItem('user')).is_mentor ? 
+                                        <button className="submit col-md-8 col-md-offset-2 text-center" onClick={() => {this.setState({ mentorShow: !this.state.mentorShow }); }}>Mentor this challemge</button> :
+                                        <div></div>
+                                    }
+                                </div>
+                            :
+                                <div>
+                                    <NavLink to="/login"> <button className="submit col-md-8 col-md-offset-2 text-center" >Submit a solution</button> </NavLink>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                
             </div>
             <div className={ this.state.solutionShow ? "solution-overlay" : "solution-overlay hidden" }>
                 <div className="inner-overlay" >
@@ -467,8 +498,6 @@ class App extends React.Component {
                     <div className="overlay-text col-md-12">
                         <h1 className="text-center" > Be a Mentor! </h1>
 
-                        
-                        
                         <div className="input-group-overlay-1 col-md-8 col-md-offset-2">
                             
                             <input type="checkbox" onChange={this.handleCheck}/>       
