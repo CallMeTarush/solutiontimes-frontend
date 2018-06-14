@@ -76,6 +76,7 @@ input.login-input, textarea {
     border-radius: 7px;
     background-color: #eeeeee;  
     height: 49px;
+    padding: 1% 2% !important;
 }
 .signin {
     border-radius: 7px;
