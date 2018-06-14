@@ -138,9 +138,8 @@ class App extends React.Component {
       
       for(var key in this.state.queriedstatements) {
         
-        console.log(key,prop);
         if(prop == this.state.queriedstatements[key]) {
-          console.log("added statement");
+          
           probs.push( <ProblemStatement
               title={p[prop].title} 
               description={p[prop].description} 
@@ -338,7 +337,7 @@ class App extends React.Component {
     console.log(sessionStorage.getItem('userKey'))
 
     if( sessionStorage.getItem('isLoggedin') === "1" ) 
-      return( <h1> Hi, {this.state.user.name}! </h1>)
+      return( <h1 className="name" > Hi, {this.state.user.name}! </h1>)
     else
       return(null)
   }

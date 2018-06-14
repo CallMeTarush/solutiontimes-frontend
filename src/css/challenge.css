@@ -14,6 +14,13 @@
     padding-top: 5%;
     background: #F9F9F9;
 }
+.footer {
+    height: 2em;
+    margin: 0;
+    color: white;
+    display: inline;
+    background: #01426a !important;
+}
 .challenge-video {
     padding: 2% 7%;
     padding-top: 5%;
@@ -61,7 +68,7 @@ table {
     width: 33.3% !important;
 }
 .view {
-    color: #eeb237;
+    color: #01426a !important;
     font-family: Raleway;
     font-size: 19px;
     font-weight: bold;
@@ -70,8 +77,21 @@ table {
     line-height: 3.32;
     letter-spacing: 0.8px;
 }
-.mentor-row {
-    width: 25%;
+
+.mentorHead {
+    font-size: 22px;
+    border-bottom: 0;
+    background: #f5f5f5;
+}
+.sponsorHead {
+    font-size: 22px;
+    border-bottom: 0;
+    background: #f5f5f5;
+}
+.challengeHead {
+    font-size: 22px;
+    border-bottom: 0;
+    background: #f5f5f5;
 }
 .tablesearch.input.empty {
     font-family: FontAwesome;
@@ -136,7 +156,11 @@ tr:hover {
 .cross {
     cursor: pointer;
     text-align: right;
-    font-size: 40px;
+    font-size: 25px;
+    position: absolute;
+    top:0;
+    z-index:1000;
+    right: 0;
 }
 /* overlay */
 .hidden {
@@ -154,12 +178,23 @@ tr:hover {
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
 }
+.overlay-text h1 {
+    color: #2b2b2b;
+    font-size: 25px;
+
+}
 .inner-overlay {
-    background: white !important;
-    width: 50%;
-    height: 80%;
-    overflow-y: scroll;
+
+    padding: 1% 5%;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+    border: solid 0 #000000;
+    /* width: 50%;
+    height: 80%; */
+    /* overflow-y: scroll; */
     position: absolute;
+    /* display: inline-block; */
+    display:relative;
     top: 50%;
     left: 50%;
     font-size: 2rem;
@@ -170,10 +205,61 @@ tr:hover {
     box-shadow: 0 0 17.6px 0.4px rgba(0, 0, 0, 0.08);
 
 }
+textarea:focus, input:focus{
+    outline: none;
+}
+*:focus {
+    outline: none;
+}
+
 .input-group-overlay {
-    margin-top: 2%;
+    margin-top: 5%;
+    font-size: 15px;
+    color: #6c6c6c;
+    font-family: 'circular';
+}
+.input-group-overlay input {
+    background: transparent !important ;
+    border-bottom: solid 1.3px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-color: #e4e3e5;
+    
+}
+.input-group-overlay input:focus {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-top: 0 !important ;
+    background: transparent !important ;
+    border-bottom: solid 1.3px;
+    border-color: #01314f;
+}
+.input-group-overlay-1 {
+    margin-top: 5%;
+    font-size: 15px;
+    color: #6c6c6c;
+    font-family: 'circular';
+}
+.input-group-overlay-1 input {
+    background: transparent !important ;
+    border-bottom: solid 1.3px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-color: #e4e3e5;
+    
+}
+.input-group-overlay-1 input:focus {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-top: 0 !important ;
+    background: transparent !important ;
+    border-bottom: solid 1.3px;
+    border-color: #01314f;
 }
 #overlay-inputs {
+    margin-bottom: 5%;
     font-size: 2rem;
 }
 /* end overlay */
@@ -196,17 +282,19 @@ tr:hover {
     color: #ffffff;
 }
 .submit-sol {
-    padding: 1% 2%;
+    padding: 2% 6%;
     margin-top: 2%;
     border: 0;
-    background: #F1BC10;
+    color: white;
     font-family: circular;
     font-size: 2rem;
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
-    color: #ffffff;
+    border-radius: 5px;
+    background-image: linear-gradient(176deg, #2fbf50, #279440);
+    /* box-shadow: 0 0 1.5px 0.5px #000000; */
 }
 .batch-16 {
     margin-top: 5%;
@@ -221,8 +309,13 @@ hr {
 }
 #nme2 {
     background: white;
-    font-size: 28px;
+    font-size: 23px;
     font-family: brandon;
+
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px !important;
 }
 .show-mobile {
     display: none;
@@ -237,7 +330,9 @@ hr {
     border-left: solid 1px;
     border-right: solid 1px;
 }
-
+.mentorHead td {
+    width: 33%;
+}
 @media screen and (max-width: 1000px) {
     .show-not-mobile {
         display: none;
@@ -277,8 +372,18 @@ hr {
     .mentor-row {
         font-size: 12px;
     }
+    .sponsorHead {
+        font-size: 16px;
+    }
+    .mentorHead {
+        font-size: 16px;
+    }
+    .challengeHead {
+        font-size: 16px;
+    }
 
 }
+
 @media screen and (max-width: 768px) {
     #nme2 {
         font-size: 12px !important;
@@ -306,4 +411,8 @@ hr {
 }
 tbody {
     transition: all .5s linear;
+}
+.text {
+    vertical-align: middle;
+    margin-bottom: 0;
 }

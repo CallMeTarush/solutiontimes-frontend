@@ -19,9 +19,9 @@ class App extends React.Component {
         this.state = {
             problemID: '',
             optionSelect: 0,
-            contestants: {},
-            mentors: {},
-            sponsors: {},
+            contestants: [],
+            mentors: [],
+            sponsors: [],
             active: [],
             search: '',
             title: '',
@@ -34,6 +34,7 @@ class App extends React.Component {
             checked: false,
             domain: '',
             time_to_show: '',
+            queriedstatements: [],
         }
 
         this.toggle = this.toggle.bind(this);
@@ -41,37 +42,38 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-        console.log( window.api );
 
         axios.get(window.api + `problemstatements/${this.props.params.id}`)
         .then(({ data }) => {
-            console.log(data);
-            // this.state.problemstatements = data;
-            // this.setState( 
-            // {
-            //     problemstatements: data
-            // }
-            // );
-            // console.log(this.state.problemstatements);
-            // this.initLoad();
+
+
             this.setState({
                 title: data.Problemstatement.title,
                 description: data.Problemstatement.description,
                 problemID: data.Problemstatement.id,
                 domain: data.Problemstatement.domain,
-                time_to_show: data.Problemstatement.time_to_show
+                time_to_show: data.Problemstatement.time_to_show,
+                contestants: data.Solutions,
+                mentors: data.Mentors,
+                sponsors: data.Sponsors
             })
+            
             var video_id = data.Problemstatement.videolink.split('v=')[1];
             var ampersandPosition = video_id.indexOf('&');
             if(ampersandPosition != -1) {
                 video_id = video_id.substring(0, ampersandPosition);
             }
             
-            this.state.contestants = data.Solutions
-            this.state.mentors = data.Mentors
-            this.state.sponsors = data.Sponsors
-            
-
+            for(var key in data.Solutions ) {
+                this.state.queriedstatements.push(key);
+            }
+            // this.state.contestants = Object.assign(data.Solutions)
+            // this.state.mentors = data.Mentors
+            // this.state.sponsors = data.Sponsors
+            // this.state.queriedstatements = data.Solutions
+            console.log(data.Solutions)
+            console.log(this.state.contestants)
+            console.log(this.state.queriedstatements)
             this.state.youtube = this.state.youtube.concat(video_id);
             this.forceUpdate();
         });
@@ -84,48 +86,86 @@ class App extends React.Component {
 
         if(this.state.optionSelect==0) {
             data = this.state.contestants;
+
+            rows_to_push.push(
+                <tr className="challengeHead" >
+                    <td> Name </td>
+                    <td> Email </td>
+                    <td> Category submitted </td>
+                </tr>
+            )
+
             for(var j in data) {
-                
-                rows_to_push.push(
-                    
-                    <tr id={j}>
-                        <td className="contestant-row" > {data[j].team_name} </td>
-                        <td className="contestant-row"> {data[j].college} </td>
-                        <td className="contestant-row"> {data[j].category} </td>
-                        <td className="contestant-row view"> View </td> 
-                    </tr>
-                    
-                )
-                
+
+                for(var key in this.state.queriedstatements) {
+                            
+                    if(j == this.state.queriedstatements[key] ) {
+
+                        rows_to_push.push(
+                            
+                            <tr id={j}>
+                                <td className="contestant-row" > {data[j].team_name} </td>
+                                <td className="contestant-row"> {data[j].college} </td>
+                                <td className="contestant-row"> {data[j].category} </td>
+                            </tr>
+                            
+                        )
+                    }
+                }
             }
         }
 
         else if(this.state.optionSelect==1) {
             
             data = this.state.sponsors;
-
+            rows_to_push.push(
+                <tr className="sponsorHead" >
+                    <td> Name </td>
+                    <td> Email </td>
+                    <td> Challenges Sponsored </td>
+                </tr>
+            )
             for(var j in data) {
-                rows_to_push.push(
-                    <tr className="sponsor-row">
-                        <td className="sponsor-row"> {data[j].organization_name} </td>
-                        <td className="sponsor-row"> {data[j].email} </td>
-                        <td className="sponsor-row view"> View </td>
-                    </tr>
-                )
+
+                for(var key in this.state.queriedstatements) {
+                            
+                    if(j == this.state.queriedstatements[key] ) {
+                        rows_to_push.push(
+                            <tr className="sponsor-row">
+                                <td className="sponsor-row"> {data[j].organization_name} </td>
+                                <td className="sponsor-row"> {data[j].email} </td>
+                                <td className="sponsor-row view"> {data[j].no_of_sponsors} </td>
+                            </tr>
+                        )
+                    }
+                }
             }
         }
 
         else {
             data = this.state.mentors;
+            rows_to_push.push(
+                <tr className="mentorHead" >
+                    <td> Name </td>
+                    <td> Email </td>
+                    <td> Challenges Mentored </td>
+                </tr>
+            )
             for(var j in data) {
 
-                rows_to_push.push(
-                    <tr>
-                        <td className="mentor-row"> {data[j].organization_name} </td>
-                        <td className="mentor-row"> {data[j].email} </td>
-                        <td className="mentor-row view"> View </td>
-                    </tr>
-                )
+                for(var key in this.state.queriedstatements) {
+                            
+                    if(j == this.state.queriedstatements[key] ) {
+
+                        rows_to_push.push(
+                            <tr>
+                                <td className="mentor-row"> {data[j].organization_name} </td>
+                                <td className="mentor-row"> {data[j].email} </td>
+                                <td className="mentor-row view"> {data[j].no_of_mentors} </td>
+                            </tr>
+                        )
+                    }
+                }
             }
         }
 
@@ -134,8 +174,28 @@ class App extends React.Component {
 
     toggle(x) {
         console.log(x)
+
+        while(this.state.queriedstatements.length>0) {
+            this.state.queriedstatements.pop()
+        }
+
         if(x == 3) {
             this.props.history.push('/login')
+        }
+        if( x==0 ) {
+            for(var key in this.state.contestants ) {
+                this.state.queriedstatements.push(key);
+            }
+        }
+        if( x==1 ) {
+            for(var key in this.state.sponsors ) {
+                this.state.queriedstatements.push(key);
+            }
+        }
+        if( x==2 ) {
+            for(var key in this.state.mentors ) {
+                this.state.queriedstatements.push(key);
+            }
         }
         this.setState(
             {
@@ -146,32 +206,29 @@ class App extends React.Component {
     
     getInfo = () => {
 
-        var search_data,p;
-
-        console.log(this.state.optionSelect);
-        console.log(this.search.value);        
+        var search_data;
 
         if(this.state.optionSelect == 0) {
-            search_data = this.state.data.contestants;
-            this.state.data.contestants = search_data;
+            search_data = this.state.contestants;            
         }
 
         else if(this.state.optionSelect == 2) {
-            search_data = this.state.data.mentors;
-            this.state.data.mentors = search_data;
+            search_data = this.state.mentors;
         }
         
         else {
-            search_data = this.state.data.sponsors;
-            this.state.data.sponsors = search_data;
+            search_data = this.state.sponsors;
         }
-
-        console.log(this.state.data);
-
-        if( QUERY_LENGTH == 0 ) {      
-            // for( var key in search_data ) {
-            //   this.state.queriedstatements.push(key);
-            // }
+        if( QUERY_LENGTH < 2 ) {
+            
+            while(this.state.queriedstatements.length > 0) {
+              this.state.queriedstatements.pop();
+            }
+            
+            for( var key in search_data ) {
+              this.state.queriedstatements.push(key);
+            }
+            this.forceUpdate();
         }
       
         else {
@@ -179,18 +236,30 @@ class App extends React.Component {
             while(this.state.queriedstatements.length > 0) {
                 this.state.queriedstatements.pop();
             }
+            var p = search_data
       
-            for( var key in p) {
-              
-                var title = p[key].title;
-      
-                if(title.search(this.state.query)!=-1) {              
-                    this.state.queriedstatements.push(key);      
+            for( var key in p) {        
+
+                if(this.state.optionSelect == 0) {
+                    var title = p[key].team_name;           
+                }
+                
+                else {
+                    var title = p[key].organization_name;           
                 }
 
-                console.log(this.state.queriedstatements);
+                            
+                title = title.toLowerCase();
+                if(title.search(this.state.query.toLowerCase() )!=-1) {
+        
+                    this.state.queriedstatements.push(key);
+        
+                }
+                
             }
+      
         }
+        console.log(search_data);
     }
 
     handleInputChange = () => {
@@ -430,9 +499,9 @@ class App extends React.Component {
                 <div className="inner-overlay" >
                     <div className="cross" onClick={() => { this.closeAll() }}> <FaClose /> </div>
                     <div className="overlay-text col-md-12">
-                        <h1 className="text-center" > Submit a Solution! </h1>
+                        <h1 className="text-center" > Submit a Solution </h1>
 
-                        <div className="input-group-overlay col-md-8 col-md-offset-2">
+                        <div className="input-group-overlay">
                             Link to solution (Video):
                             <input
                                 placeholder="https://www.youtube.com/watch?v=id"
@@ -442,7 +511,7 @@ class App extends React.Component {
                                 required autocomplete="off" 
                             />       
                         </div>
-                        <div className="input-group-overlay col-md-8 col-md-offset-2">
+                        <div className="input-group-overlay ">
                             Category solution is being submitted in:<br />
                             <select className="overlay-input" >
                                 <option>
@@ -456,7 +525,7 @@ class App extends React.Component {
                                 </option>
                             </select>
                         </div>
-                        <div className="input-group-overlay col-md-8 col-md-offset-2">
+                        <div className="input-group-overlay">
                             
                             <input type="checkbox" onChange={this.handleCheck}/>       
                             &nbsp;&nbsp;
@@ -464,7 +533,7 @@ class App extends React.Component {
                         </div>                        
                         { this.state.checked ? <div></div> : 
                             <div>
-                            <div className="input-group-overlay col-md-8 col-md-offset-2">
+                            <div className="input-group-overlay ">
                                 Team name
                                 <input
                                     placeholder="Golden State Warriors"
@@ -474,7 +543,7 @@ class App extends React.Component {
                                     required autocomplete="off" 
                                 />       
                             </div>
-                            <div className="input-group-overlay col-md-8 col-md-offset-2">
+                            <div className="input-group-overlay ">
                                 Team size
                                 <input
                                     placeholder="6"
@@ -498,7 +567,7 @@ class App extends React.Component {
                     <div className="overlay-text col-md-12">
                         <h1 className="text-center" > Be a Mentor! </h1>
 
-                        <div className="input-group-overlay-1 col-md-8 col-md-offset-2">
+                        <div className="input-group-overlay-1">
                             
                             <input type="checkbox" onChange={this.handleCheck}/>       
                             &nbsp;&nbsp;
@@ -506,7 +575,7 @@ class App extends React.Component {
                         </div>                        
                         { this.state.checked ? <div></div> : 
                             
-                            <div className="input-group-overlay-1 col-md-8 col-md-offset-2">
+                            <div className="input-group-overlay-1">
                                 Organization name
                                 <input
                                     placeholder="Golden State Warriors"
@@ -528,10 +597,10 @@ class App extends React.Component {
             <div className={ this.state.sponsorShow ? "solution-overlay" : "solution-overlay hidden" }>
                 <div className="inner-overlay">
                 <div className="cross" onClick={() => { this.closeAll() }}> <FaClose /> </div>
-                    <div className="overlay-text col-md-12">
-                        <h1 className="text-center" > Become a Sponsor!! </h1>
+                    <div className="overlay-text">
+                        <h1 className="text-center" > Become a Sponsor </h1>
 
-                        <div className="input-group-overlay-1 col-md-8 col-md-offset-2">
+                        <div className="input-group-overlay-1">
                             
                             <input type="checkbox" onChange={this.handleCheck}/>       
                             &nbsp;&nbsp;
@@ -539,7 +608,7 @@ class App extends React.Component {
                         </div>                        
                         { this.state.checked ? <div></div> : 
                             
-                            <div className="input-group-overlay-1 col-md-8 col-md-offset-2">
+                            <div className="input-group-overlay-1">
                                 Organization name
                                 <input
                                     placeholder="Golden State Warriors"
@@ -556,6 +625,9 @@ class App extends React.Component {
                         <button className="submit-sol" onClick={() => { this.submitNotSolution() }}>Submit</button>
                     </div>
                 </div>
+            </div>
+            <div className="row col-md-12 footer text-center">
+                <p className="text"> &#169;Solution Times Pvt. Ltd. </p>
             </div>
         </div>
         );  

@@ -6,6 +6,9 @@
     transform: translate(-50%, -50%); 
 
 }
+.name {
+    padding-left: calc(15px + 8vw) !important;
+}
 .container-div {
     /* margin: 0 10%; */
 }

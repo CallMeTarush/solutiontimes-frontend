@@ -120,7 +120,9 @@ class App extends React.Component {
                   ) : (
                     <Nav pullRight>
                       <NavItem eventKey="5" onClick={() => {this.handleLogout()}} >
-                        Logout
+                        <span className="login-button">
+                          Logout
+                        </span>
                       </NavItem>
                     </Nav>    
                     
