@@ -133,9 +133,7 @@ tr {
     border-color: #aaa;
     border-width: 2px;
 }
-tr:hover {
-    background: #eee;    
-}
+
 .sponsor-row {
     width: 50%;
 }
@@ -353,6 +351,30 @@ hr {
 @media screen and (max-width: 768px) {
     .inner-overlay {
         width: 95%;
+    }
+}
+select.overlay-input {
+    border: solid #ccc 1px;
+    background: #f7f7f7;
+    padding: 1% 2%;
+    margin-top: 5px;
+}
+@media only screen and (max-width: 1366px) and (min-width: 1000px)  {
+    .table-ka-head {
+        font-size: 0.75em;        
+    }
+    .challengeHead td{
+        font-size: 0.7em ;
+        font-weight: bolder;
+    }
+    .mentorHead td{
+        font-size: 0.7em ;
+    }
+    .sponsorHead td{
+        font-size: 0.7em ;
+    }
+    .inner-overlay {
+        padding: 1% 2%;
     }
 }
 @media screen and (max-width: 1300px) {

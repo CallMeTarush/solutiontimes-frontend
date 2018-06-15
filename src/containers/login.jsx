@@ -79,7 +79,7 @@ export default class Login extends Component {
                     <img src={plane} alt={"plane"}/> 
                 </div>
                 <div className={loginformClass.join(' ')} style={setHeight} >
-                <Form className="login-form col-md-12" id="form-login" >
+                <Form className="login-form col-md-10 col-md-offset-1" id="form-login" >
 
                     <div className="theloginform" >
 
