@@ -16,6 +16,11 @@
     background: #f5f5f5 !important;
     border: 0 !important;
 }
+.big-video {
+    padding: 0 15px !important ;
+    padding-bottom: 15px !important;
+    background: #f2f2f2;
+}
 .selected #select {
     background: #fff !important;
 }
@@ -42,6 +47,9 @@
 .choice-block {
     margin: 0;
     height: 100% !important;
+}
+.more-details a {
+    color: #007bff !important;
 }
 .choice {
     display: table-cell;
@@ -165,6 +173,7 @@
 .dropdown:hover .dropbtn {
     background-color: #f5f5f5;
 }
+
 @media screen and (max-width: 1000px) {
     .the-bar {
         margin-top: 3rem;
@@ -174,7 +183,9 @@
     }
 }
 @media screen and (min-width: 1366px) {
-
+    .big-video {
+        margin-top: 15px;
+    }
     .title {
         font-size: 1.75rem !important;
     }
@@ -210,7 +221,8 @@
     .the-bar {
         margin-top:0;
         padding-left: 15px;
-    }    #nme {
+    }   
+     #nme {
         padding: 0 5px;
         
     }
@@ -238,8 +250,31 @@
     .top-m {
         margin-top: 0 !important;
     }
+    .problemstatements {
+        padding: 0 !important;
+    }
+    .big-challenge {
+        padding: 0 10px;
+    }
+    .date {
+        font-size: 8px;
+    }
+    .contestants {
+        font-size: 8px;
+    }
+    .search-bar {
+        padding-left: 0 !important;
+        width: 95% !important;
+    }
+    .sorter {
+        padding: 0 !important;
+    }
+    .choice-block {
+        font-size: 13px !important;
+        text-align: center !important;        
+    }
     .search-adv {
-        /* margin: 10em 0; */
+        margin: 50px 0 !important;
     }
 }
 @media screen and (min-width: 768px){

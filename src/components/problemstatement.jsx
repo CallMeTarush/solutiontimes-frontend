@@ -13,7 +13,8 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            youtube: "https://www.youtube.com/embed/"
+            youtube: "https://www.youtube.com/embed/",
+            timesSelected: 0,
         };
     }
 
@@ -22,13 +23,22 @@ class App extends React.Component {
         this.props.onHeight(elHeight);            
 
     }
-
+    updateIterator = () => {
+        // console.log(this.props.iterator)
+        if(this.state.timesSelected%2==0 ) {
+            this.props.updateProblemStatement( this.props.iterator )
+        }
+        else {
+            this.props.updateProblemStatement( 0 )
+        }
+        this.state.timesSelected+=1;
+    }
     render() {
         
         var video_link = this.state.youtube.concat(this.props.youtube);
         
-        console.log(video_link);
-        console.log(this.props.height);
+        // console.log(video_link);
+        // console.log(this.props.height);
         
         var matchHeight = {
             color: 'black'
@@ -39,11 +49,14 @@ class App extends React.Component {
                 height: this.props.height
             };
         }
-
+       
         return (
             <div>       
-                <NavLink to={`/challenge/${this.props.id}`}>
-                    <div className="col col-lg-3 col-sm-6 col-xs-12 big-challenge" >
+                {/* <NavLink 
+                to={`/challenge/${this.props.id}`}
+                > */}
+                <div onClick={() => this.updateIterator() } >
+                    <div className="col col-lg-3 col-sm-6 col-xs-6 big-challenge" >
                         {/* <div className="category"> Domain: {this.props.domain} </div> */}
                         <div className="challenge" style={matchHeight} id={this.props.id}>
                             
@@ -56,7 +69,8 @@ class App extends React.Component {
                             <span className="date"> {this.props.date} </span>
                         </div>
                     </div>
-                </NavLink>         
+                </div>
+                {/* </NavLink>          */}
             </div>
         );  
     }

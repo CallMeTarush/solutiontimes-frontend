@@ -11,6 +11,8 @@ import { DropdownButton,MenuItem } from 'react-bootstrap'
 import { PulseLoader } from 'react-spinners'
 import FaSearch from 'react-icons/lib/fa/search'
 import FaAngleDown from 'react-icons/lib/fa/angle-down'
+import ResponsiveEmbed from 'react-responsive-embed'
+import { NavLink } from 'react-router-dom';
 
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
@@ -35,7 +37,12 @@ class App extends React.Component {
     user: [],
     searching: false,
     selectValueDuration: 'Any',
-    selectValueTime: 'All time'
+    selectValueTime: 'All time',
+    selectedProp: -1,
+    timesCalled: 0,
+    screenWidth: -1,
+    lastItem: -1,
+    videoLinks: [],
   }
   
   
@@ -133,36 +140,106 @@ class App extends React.Component {
 
     var p = this.state.problemstatements;
     var probs = [];
-    
+    var iterator = 0;
+    if( this.state.screenWidth > 1200 ) {
+      var actualSelected = Math.ceil(this.state.selectedProp/4.0) * 4;
+    }
+    else {
+      var actualSelected = Math.ceil(this.state.selectedProp/2.0) * 2;
+    }
+    this.state.videoLinks = [];
+
+    if(actualSelected > this.state.lastItem ) {
+      actualSelected = this.state.lastItem;
+    }
+
+    console.log(actualSelected);
     for (var prop in p) {
       
       for(var key in this.state.queriedstatements) {
         
         if(prop == this.state.queriedstatements[key]) {
-          
-          probs.push( <ProblemStatement
-              title={p[prop].title} 
-              description={p[prop].description} 
-              youtube = {p[prop].video_id}
-              domain = {p[prop].domain}
-              submissions = {p[prop].submissions}
-              date = {p[prop].time_to_show}
-              id = {p[prop].id}
-              onHeight = {this.handleHeight}
-              height = {this.state.height}
-              /> 
-          );
-    
-        }
+
+          iterator+=1;
+          this.state.videoLinks = this.state.videoLinks.concat( p[prop].video_id )
+            if( iterator != actualSelected ) {
+              probs.push( 
+                
+                <div id={prop}>
+                  <ProblemStatement
+                    iterator={iterator}
+                    title={p[prop].title} 
+                    description={p[prop].description} 
+                    youtube = {p[prop].video_id}
+                    domain = {p[prop].domain}
+                    submissions = {p[prop].submissions}
+                    date = {p[prop].time_to_show}
+                    id = {p[prop].id}
+                    onHeight = {this.handleHeight}
+                    height = {this.state.height}
+                    updateProblemStatement = {this.updateProblemStatement}
+                    /> 
+                </div>
+              );              
+            }
+            else {
+              var description = p[prop].description;
+              if( description.length > 200 ) {
+                description = p[prop].description.substring(0,200);
+                description = description.concat('...')
+              }
+              console.log(description)
+              var video_link = "https://www.youtube.com/embed/".concat( this.state.videoLinks[this.state.selectedProp - 1] );
+              probs.push( 
+                
+                <div id={prop}>
+                  <ProblemStatement
+                    title={p[prop].title} 
+                    description={p[prop].description} 
+                    youtube = {p[prop].video_id}
+                    domain = {p[prop].domain}
+                    submissions = {p[prop].submissions}
+                    date = {p[prop].time_to_show}
+                    id = {p[prop].id}
+                    onHeight = {this.handleHeight}
+                    height = {this.state.height}
+                    updateProblemStatement = {this.updateProblemStatement}
+                  />
+                  {/* <div className="col-md-12"> */}
+                    {/* PLEASE WHAT */}
+                    {/* <ResponsiveEmbed src={video_link} allowFullScreen /> */}
+                  {/* </div> */}
+                  <div className="big-video col-xs-12 ">
+                    <ResponsiveEmbed src={video_link} allowFullScreen />
+                    <h3> {p[prop].title} </h3>
+                    <h4> Published: { p[prop].time_to_show } </h4>
+                    
+                    <div className="in-home-desc"> { description }</div>
+                    <p className="text-right more-details"> <NavLink to={`/challenge/${ p[prop].id }`} > More Details... </NavLink> </p>
+                  </div>
+                </div>
+              );
+            }
+            
+          }
       }   
     }
-    
+    // console.log(this.state.videoLinks);
+    this.state.lastItem = iterator;
     this.state.loading = false;   
-    
-
-
     return probs;
+  }
 
+  // var reply_click = function()
+  // {
+  //     alert("Button clicked, id "+this.id+", text"+this.innerHTML);
+  // }
+  updateProblemStatement = (prop) => {
+    console.log(prop);
+    
+    // console.log(Math.ceil(prop/4.0) * 4);
+    // console.log(this.state.lastItem);
+    this.setState({ selectedProp: prop })
   }
 
   handleHeight = (height) => {
@@ -330,6 +407,7 @@ class App extends React.Component {
         height = w.innerHeight|| documentElement.clientHeight|| body.clientHeight;
 
         this.state.height = -69;
+        this.state.screenWidth = width;
         this.forceUpdate();
   }
 
@@ -378,7 +456,7 @@ class App extends React.Component {
           <div className="col-md-12">
             {this.getName() }
           </div>
-          <div className="the-bar col-md-12 row">
+          <div className="the-bar">
 
 
             <form className="search-bar col-sm-6">
@@ -406,6 +484,7 @@ class App extends React.Component {
                 </select>
               </div>
               <br className="br-mob" />
+              <br className="br-mob" />
               <div className="search-adv">
                 Duration&nbsp;&nbsp;
                 <select defaultValue={this.state.selectValueDuration} onChange={this.handleChangeDuration} >
@@ -423,6 +502,7 @@ class App extends React.Component {
                   </option>
                 </select>
               </div>
+              <br className="br-mob" />
               <br className="br-mob" />
               <div className="search-adv">
                 Uploaded &nbsp;&nbsp;
@@ -470,6 +550,7 @@ class App extends React.Component {
               this.loadProblemStatements()
             )
           }
+          {/* { this.state.timesCalled = this.state.timesCalled + 1 } */}
           </div>          
 
         </div>
