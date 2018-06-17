@@ -18,15 +18,20 @@ class App extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount() { 
         let elHeight = document.getElementById(this.props.id).clientHeight;
-        this.props.onHeight(elHeight);            
+        console.log(elHeight)
+        this.props.onHeight(elHeight);  
+        
+        var opacity = {
+            opacity: 1
+        }
 
     }
     updateIterator = () => {
         // console.log(this.props.iterator)
         if(this.state.timesSelected%2==0 ) {
-            this.props.updateProblemStatement( this.props.iterator )
+            this.props.updateProblemStatement( this.props.iterator)
         }
         else {
             this.props.updateProblemStatement( 0 )
@@ -45,29 +50,45 @@ class App extends React.Component {
         }
 
         if(this.props.height != -69) {            
-            var matchHeight = {
-                height: this.props.height
-            };
+            // var matchHeight = {
+            //     height: this.props.height
+            // };
         }
-       
+
+        if(this.props.isSelected) {
+            var opacity = {
+                opacity: 0.5,
+            }    
+        }
+
+        console.log(this.props.id, this.props.isSelected)
+
+        var title = this.props.title;
+        if(title.length > 50) {
+            title = this.props.title.substring(0,50);
+            title = title.concat('...')
+        }
         return (
-            <div>       
+            <div  >       
                 {/* <NavLink 
                 to={`/challenge/${this.props.id}`}
                 > */}
                 <div onClick={() => this.updateIterator() } >
-                    <div className="col col-lg-3 col-sm-6 col-xs-6 big-challenge" >
+                    <div className="col col-lg-3 col-sm-6 col-xs-6 big-challenge" id={this.props.id} style={opacity} >
                         {/* <div className="category"> Domain: {this.props.domain} </div> */}
-                        <div className="challenge" style={matchHeight} id={this.props.id}>
+                        <div className="challenge" style={matchHeight} >
                             
-                            <ResponsiveEmbed src={video_link} allowFullScreen />
-                            <div className="title"> {this.props.title} </div>
-                            
+                            {/* <ResponsiveEmbed src={video_link} allowFullScreen /> */}
+                            <div className="img-contianer">
+                                <img className="problem-thumbnail" src={this.props.thumbnail} />
+                                <div className="bottom-right"> {this.props.duration} </div>
+                            </div>
+                            <div className="title"> {title} </div>
+                            <div className="details">
+                             Contestants: {this.props.submissions} <strong>|</strong> {this.props.date} 
+                            </div>
                         </div>
-                        <div className="details">
-                            <span className="contestants"> Contestants: {this.props.submissions} </span>
-                            <span className="date"> {this.props.date} </span>
-                        </div>
+                        
                     </div>
                 </div>
                 {/* </NavLink>          */}

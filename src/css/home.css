@@ -17,9 +17,12 @@
     border: 0 !important;
 }
 .big-video {
-    padding: 0 15px !important ;
+    padding: 0 20px !important ;
     padding-bottom: 15px !important;
     background: #f2f2f2;
+}
+.for-margin {
+    padding: 0 15px !important;
 }
 .selected #select {
     background: #fff !important;
@@ -271,7 +274,8 @@
     }
     .choice-block {
         font-size: 13px !important;
-        text-align: center !important;        
+        text-align: center !important;     
+        padding: 0;   
     }
     .search-adv {
         margin: 50px 0 !important;

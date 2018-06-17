@@ -9,9 +9,9 @@
     text-align: left;
     color: #000000;
 }
-.contestants {
+/* .contestants {
     float: left;
-}
+} */
 .date {
     float: right;
 }
@@ -38,8 +38,20 @@
     
     height: 100%;
     /* background-color: #ffffff !important;   */
-    
-    
+
+}
+.img-contianer {
+    position: relative;
+    padding: 9% 0;
+    background: black;
+}
+.bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0.6%;
+    background: white;
+    color: #01426a;
 }
 .challenge:hover {
     /* box-shadow: 0px 2px 9.1px 0.9px rgba(0, 0, 0, 0.09) !important; */
@@ -50,6 +62,7 @@
     color: black !important;    
     transition: all .2s ease-in-out;
     margin-top: 2em;
+    height: 100%;
 }
 @media screen and (max-width: 1000px) {
     .big-challenge {
@@ -63,6 +76,10 @@
     .challenge {
         margin: 0;
     }
+}
+.problem-thumbnail {
+    width: 100% !important;
+    height: auto;
 }
 @media screen and (max-width: 1300px) {
     .big-challenge {

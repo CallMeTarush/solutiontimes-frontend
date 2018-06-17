@@ -13,6 +13,10 @@ import FaSearch from 'react-icons/lib/fa/search'
 import FaAngleDown from 'react-icons/lib/fa/angle-down'
 import ResponsiveEmbed from 'react-responsive-embed'
 import { NavLink } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import { goToAnchor,goToTop } from 'react-scrollable-anchor'
+import { configureAnchors } from 'react-scrollable-anchor'
+import ScrollableAnchor from 'react-scrollable-anchor'
 
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
@@ -48,6 +52,8 @@ class App extends React.Component {
   
   constructor() {
     super();
+
+    configureAnchors({offset: -10, scrollDuration: 400})
 
     this.handleChange = this.handleChange.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -153,6 +159,8 @@ class App extends React.Component {
       actualSelected = this.state.lastItem;
     }
 
+    var isSelected = false;
+
     console.log(actualSelected);
     for (var prop in p) {
       
@@ -161,11 +169,21 @@ class App extends React.Component {
         if(prop == this.state.queriedstatements[key]) {
 
           iterator+=1;
+          console.log(this.state.selectedProp)
+          if( iterator == this.state.selectedProp ) {
+            console.log(iterator, this.state.selectedProp)
+            isSelected = true;
+          }
+          else {
+            isSelected = false;
+          }
           this.state.videoLinks = this.state.videoLinks.concat( p[prop].video_id )
+
+
             if( iterator != actualSelected ) {
               probs.push( 
                 
-                <div id={prop}>
+                <div>
                   <ProblemStatement
                     iterator={iterator}
                     title={p[prop].title} 
@@ -178,6 +196,9 @@ class App extends React.Component {
                     onHeight = {this.handleHeight}
                     height = {this.state.height}
                     updateProblemStatement = {this.updateProblemStatement}
+                    thumbnail = { p[prop].thumbnail }
+                    isSelected = { isSelected }
+                    duration = {p[prop].duration}
                     /> 
                 </div>
               );              
@@ -192,7 +213,7 @@ class App extends React.Component {
               var video_link = "https://www.youtube.com/embed/".concat( this.state.videoLinks[this.state.selectedProp - 1] );
               probs.push( 
                 
-                <div id={prop}>
+                <div >
                   <ProblemStatement
                     title={p[prop].title} 
                     description={p[prop].description} 
@@ -204,18 +225,27 @@ class App extends React.Component {
                     onHeight = {this.handleHeight}
                     height = {this.state.height}
                     updateProblemStatement = {this.updateProblemStatement}
+                    thumbnail = { p[prop].thumbnail }
+                    isSelected = { isSelected }
+                    duration = {p[prop].duration}
+
                   />
                   {/* <div className="col-md-12"> */}
                     {/* PLEASE WHAT */}
                     {/* <ResponsiveEmbed src={video_link} allowFullScreen /> */}
                   {/* </div> */}
-                  <div className="big-video col-xs-12 ">
-                    <ResponsiveEmbed src={video_link} allowFullScreen />
-                    <h3> {p[prop].title} </h3>
-                    <h4> Published: { p[prop].time_to_show } </h4>
-                    
-                    <div className="in-home-desc"> { description }</div>
-                    <p className="text-right more-details"> <NavLink to={`/challenge/${ p[prop].id }`} > More Details... </NavLink> </p>
+                  <div className="for-margin">
+                    <ScrollableAnchor id={'theVideo'}>
+
+                      <div className="big-video col-xs-12" >
+                        <ResponsiveEmbed src={video_link} allowFullScreen />
+                        <h3> {p[prop].title} </h3>
+                        <h4> Published: { p[prop].time_to_show } </h4>
+                        
+                        <div className="in-home-desc"> { description }</div>
+                        <p className="text-center more-details"> <NavLink to={`/challenge/${ p[prop].id }`} > More Details... </NavLink> </p>
+                      </div>
+                    </ScrollableAnchor>
                   </div>
                 </div>
               );
@@ -227,7 +257,10 @@ class App extends React.Component {
     // console.log(this.state.videoLinks);
     this.state.lastItem = iterator;
     this.state.loading = false;   
+
     return probs;
+
+    
   }
 
   // var reply_click = function()
@@ -236,10 +269,10 @@ class App extends React.Component {
   // }
   updateProblemStatement = (prop) => {
     console.log(prop);
-    
-    // console.log(Math.ceil(prop/4.0) * 4);
-    // console.log(this.state.lastItem);
     this.setState({ selectedProp: prop })
+    var nis = this
+    setTimeout(function(){ nis.scrollToVideo(); }, 200);
+    
   }
 
   handleHeight = (height) => {
@@ -419,6 +452,22 @@ class App extends React.Component {
     else
       return(null)
   }
+  scrollToVideo() {
+
+    console.log("hello?")
+    // const Video = ReactDOM.findDOMNode(this.refs.theVideo)
+    // window.scrollTo(0, Video.offsetTop);
+    // scrollToComponent(this.refs.theVideo)
+    // scroller.scrollTo('theVideo', {
+    //   duration: 800,
+    //   delay: 0,
+    //   smooth: 'easeInOutQuart'
+    // });
+    // console.log("?")
+    // goToTop()
+    goToAnchor('theVideo')
+
+  }
   render() {   
     console.log(this.state.selectValue);
     let challengeClass = ["choice choice-block col-xs-6 col-sm-2"];
@@ -474,7 +523,7 @@ class App extends React.Component {
             </form>
           </div>
           { true ? 
-            <div className="col-md-12 row text-center top-m " > 
+            <div className="col-md-12 text-center top-m " > 
               <div className="search-adv">
                 Sort by &nbsp;&nbsp;
                 <select >
@@ -550,12 +599,14 @@ class App extends React.Component {
               this.loadProblemStatements()
             )
           }
+  
           {/* { this.state.timesCalled = this.state.timesCalled + 1 } */}
           </div>          
 
         </div>
       </div>
     );
+    
   }    
 }
 

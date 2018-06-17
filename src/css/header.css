@@ -41,6 +41,10 @@ a.active {
         padding-top: 10px;
         padding-bottom: 10px;
     }
+    .login-button {        
+        padding: 1% 2% !important;        
+
+    }
 }
 .login-button {
     background: white;
