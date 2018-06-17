@@ -204,13 +204,14 @@ class App extends React.Component {
               );              
             }
             else {
-              var description = p[prop].description;
-              if( description.length > 200 ) {
-                description = p[prop].description.substring(0,200);
+              var description = this.state.problemstatements[this.state.selectedProp - 1 ].description;
+              if( description.length > 400 ) {
+                description = p[prop].description.substring(0,400);
                 description = description.concat('...')
               }
-              console.log(description)
+              // console.log(description)
               var video_link = "https://www.youtube.com/embed/".concat( this.state.videoLinks[this.state.selectedProp - 1] );
+              // console.log( this.state.problemstatements[this.state.selectedProp - 1 ] );
               probs.push( 
                 
                 <div >
@@ -239,8 +240,8 @@ class App extends React.Component {
 
                       <div className="big-video col-xs-12" >
                         <ResponsiveEmbed src={video_link} allowFullScreen />
-                        <h3> {p[prop].title} </h3>
-                        <h4> Published: { p[prop].time_to_show } </h4>
+                        <h3> {this.state.problemstatements[this.state.selectedProp - 1 ].title} </h3>
+                        <h4> Published: { this.state.problemstatements[this.state.selectedProp - 1 ].time_to_show } </h4>
                         
                         <div className="in-home-desc"> { description }</div>
                         <p className="text-center more-details"> <NavLink to={`/challenge/${ p[prop].id }`} > More Details... </NavLink> </p>

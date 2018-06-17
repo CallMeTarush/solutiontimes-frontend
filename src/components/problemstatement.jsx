@@ -20,7 +20,7 @@ class App extends React.Component {
 
     componentDidMount() { 
         let elHeight = document.getElementById(this.props.id).clientHeight;
-        console.log(elHeight)
+        // console.log(elHeight)
         this.props.onHeight(elHeight);  
         
         var opacity = {
@@ -61,13 +61,15 @@ class App extends React.Component {
             }    
         }
 
-        console.log(this.props.id, this.props.isSelected)
+        // console.log(this.props.id, this.props.isSelected)
 
         var title = this.props.title;
         if(title.length > 50) {
             title = this.props.title.substring(0,50);
             title = title.concat('...')
         }
+
+        
         return (
             <div  >       
                 {/* <NavLink 
