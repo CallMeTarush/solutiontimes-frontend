@@ -70,6 +70,8 @@ class App extends React.Component {
     console.log(QUERY_LENGTH)
     if( QUERY_LENGTH < 2 ) {
       
+      this.state.searching = false;
+
       while(this.state.queriedstatements.length > 0) {
         this.state.queriedstatements.pop();
       }
@@ -523,7 +525,7 @@ class App extends React.Component {
               
             </form>
           </div>
-          { true ? 
+          { this.state.searching ? 
             <div className="col-md-12 text-center top-m " > 
               <div className="search-adv">
                 Sort by &nbsp;&nbsp;
