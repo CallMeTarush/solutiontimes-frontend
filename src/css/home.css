@@ -187,6 +187,13 @@
     .problemstatements {
         margin-top: 3rem !important;
     }
+    .big-challenge {
+        margin-top: 5px !important;
+        margin-bottom: 0 !important;
+    }
+    .title {
+        margin: 5px 0 !important;
+    }
 }
 @media screen and (min-width: 1366px) {
     .big-video {
