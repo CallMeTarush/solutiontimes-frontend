@@ -487,7 +487,7 @@ class App extends React.Component {
     console.log(this.state.addClass);
 
     return (      
-      <div>
+      <div className="home-container" >
         <Header {...this.props} />  
         <div className="sorter col-md-12">
             <span className={challengeClass.join(' ')} onClick={() => {this.toggle(1)}} >Challenges</span>          
