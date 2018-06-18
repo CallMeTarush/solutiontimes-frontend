@@ -187,6 +187,9 @@
     .problemstatements {
         margin-top: 3rem !important;
     }
+    #nme {
+        font-size: 18px;
+    }
     .big-challenge {
         margin-top: 5px !important;
         margin-bottom: 0 !important;
