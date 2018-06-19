@@ -201,6 +201,7 @@ class App extends React.Component {
                     thumbnail = { p[prop].thumbnail }
                     isSelected = { isSelected }
                     duration = {p[prop].duration}
+                    views = {p[prop].views}
                     /> 
                 </div>
               );              
@@ -231,6 +232,7 @@ class App extends React.Component {
                     thumbnail = { p[prop].thumbnail }
                     isSelected = { isSelected }
                     duration = {p[prop].duration}
+                    views = {p[prop].views}
 
                   />
                   {/* <div className="col-md-12"> */}

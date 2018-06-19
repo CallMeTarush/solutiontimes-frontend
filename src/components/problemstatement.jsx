@@ -87,7 +87,10 @@ class App extends React.Component {
                             </div>
                             <div className="title"> {title} </div>
                             <div className="details">
-                             Contestants: {this.props.submissions} <strong>|</strong> {this.props.date} 
+                                {this.props.date} <strong>|</strong> {this.props.views} views
+                            </div>
+                            <div className="details">
+                                Contestants: {this.props.submissions} <strong>|</strong> <span className="more-details"> <NavLink to={`/challenge/${ this.props.id }`} > More Details </NavLink> </span>
                             </div>
                         </div>
                         
