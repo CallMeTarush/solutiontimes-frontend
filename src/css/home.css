@@ -16,6 +16,9 @@
     background: #fff !important;
     border: 0 !important;
 }
+.padding-for-row {
+    padding: 0 20px !important ;   
+}
 .big-video {
     padding: 0 20px !important ;
     padding-bottom: 15px !important;
@@ -221,9 +224,9 @@
     }
 
 }
-@media only screen and (max-width: 1366px) and (min-width: 1000px)  {
+@media only screen and (max-width: 1366px) and (min-width: 799px)  {
     .the-bar {
-        margin-top: 2em;
+        margin-top: 65px;
     }
     .choice {
         font-size: 1em !important;
@@ -299,4 +302,17 @@
     .navbar-collapse {
         padding: 0 !important;
     }
+}
+
+
+/*bleh*/
+.big-video h3 {
+    display: inline-block;
+    float: left;
+}
+.big-video .likes {
+    margin-top:20px;
+    display: inline-block;
+    float: right;
+    vertical-align: bottom;
 }

@@ -52,12 +52,15 @@ a.active {
     padding: 20%;
     border-radius: 17.5px;
 }
-@media only screen and (max-width: 1366px) and (min-width: 1000px)  {
+@media only screen and (max-width: 1366px) and (min-width: 799px)  {
     .navbar-nav > li > a {
         line-height: 50px;
     }
     .navbar {min-height:32px !important}
     .navbar {
         font-size: 1em !important;
+    }
+    .navbar-brand {
+        line-height: 50px;
     }
 }

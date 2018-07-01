@@ -42,6 +42,7 @@ class App extends React.Component {
     searching: false,
     selectValueDuration: 'Any',
     selectValueTime: 'All time',
+    selectValueSort: 'all',
     selectedProp: -1,
     timesCalled: 0,
     screenWidth: -1,
@@ -149,7 +150,7 @@ class App extends React.Component {
     var p = this.state.problemstatements;
     var probs = [];
     var iterator = 0;
-    if( this.state.screenWidth > 1200 ) {
+    if( this.state.screenWidth > 799 ) {
       var actualSelected = Math.ceil(this.state.selectedProp/4.0) * 4;
     }
     else {
@@ -214,7 +215,14 @@ class App extends React.Component {
               }
               // console.log(description)
               var video_link = "https://www.youtube.com/embed/".concat( this.state.videoLinks[this.state.selectedProp - 1] );
+              video_link = video_link.concat("?autoplay=1");
               // console.log( this.state.problemstatements[this.state.selectedProp - 1 ] );
+              var likes = Number(this.state.problemstatements[this.state.selectedProp - 1 ].likes_number);
+              var dislikes = Number( this.state.problemstatements[this.state.selectedProp - 1 ].dislikes_number);
+              var widthPercent = (likes)/(dislikes + likes);
+              
+              widthPercent = widthPercent*100;
+
               probs.push( 
                 
                 <div >
@@ -243,8 +251,24 @@ class App extends React.Component {
                     <ScrollableAnchor id={'theVideo'}>
 
                       <div className="big-video col-xs-12" >
-                        <ResponsiveEmbed src={video_link} allowFullScreen />
-                        <h3> {this.state.problemstatements[this.state.selectedProp - 1 ].title} </h3>
+                        <ResponsiveEmbed src={video_link} allowFullScreen autoplay />
+                        <div className="row padding-for-row" >
+                          <h3> {this.state.problemstatements[this.state.selectedProp - 1 ].title} </h3>
+
+                          <div className="likes col-md-4 text-right" style={{fontSize: "18px"}} >
+                            {this.state.problemstatements[this.state.selectedProp - 1 ].views} views
+
+
+                            <div className="col-md-12 like-container" style={{height:"0.25em", background:"black" }} >
+                              <div style={{ width: widthPercent + "%", background: "#3981EA", height: "100%" }}></div>
+                            </div>
+
+                            <i class="fa fa-thumbs-up" style={{float:"left", fontSize:"14px", marginTop: "5px"  }} >{likes}</i>
+                            <i class="fa fa-thumbs-down" style={{float:"right", fontSize:"14px", marginTop: "5px"  }} > {dislikes} </i>
+                          </div>
+
+
+                          </div>
                         <h4> Published: { this.state.problemstatements[this.state.selectedProp - 1 ].time_to_show } </h4>
                         
                         <div className="in-home-desc"> { description }</div>
@@ -269,7 +293,8 @@ class App extends React.Component {
   }
 
   // var reply_click = function()
-  // {
+  // {    <option value="" disabled selected>Select your option</option>
+
   //     alert("Button clicked, id "+this.id+", text"+this.innerHTML);
   // }
   updateProblemStatement = (prop) => {
@@ -285,7 +310,8 @@ class App extends React.Component {
     var nis = this;
     if(height > nis.state.height) {
       nis.state.height = height ;
-      nis.forceUpdate();
+      nis.forceUpdate();    <option value="" disabled selected>Select your option</option>
+
     }
     
   }
@@ -318,6 +344,111 @@ class App extends React.Component {
     }
 
   }
+
+  handleChangeSort = (e) => {
+    
+    // this.state.queriedstatements = [];
+    console.log(e.target.value)
+    this.setState({ selectValueSort:e.target.value });
+
+
+    console.log(this.state.selectValueSort)
+    switch(e.target.value) {
+      case 'Latest':
+        console.log("lmao");
+        this.sortLatest();
+        break;
+      case 'Liked':
+        this.sortLiked();
+        break;
+      case 'Title':
+        this.sortTitle();
+        break;
+      case 'Views':
+        this.sortViews();
+        break;
+      
+    }
+
+    // for(var key in p) {
+      
+    //   console.log(p[key].domain);
+    //   console.log(e.target.value);
+    //   console.log(p[key]);
+
+
+    //   if(p[key].domain == e.target.value) {
+    //     this.state.queriedstatements.push(key);
+    //   }
+
+    // }
+
+  }
+
+  sortLatest = () => {
+  
+    function compare(a,b) {
+  
+      console.log(a.title,b.title)
+  
+      if (a.title < b.title)
+        return 1;
+      if (a.title > b.title)
+        return -1;
+      return 0;
+    }
+    
+    console.log(this.state.problemstatements.sort(compare));
+  
+  }
+  sortLiked = () => {
+    
+    function compare(a,b) {
+      console.log(a)
+      console.log(Number(a.likes_number),Number(b.likes_number))
+  
+      if (Number(a.likes_number) < Number(b.likes_number))
+        return -1;
+      if (Number(a.likes_number) > Number(b.likes_number))
+        return 1;
+      return 0;
+    }
+    console.log(this.state.problemstatements.sort(compare));
+  }
+  sortTitle = () => {
+
+    function compare(a,b) {
+  
+      console.log(a.title,b.title)
+  
+      if (a.title < b.title)
+        return -1;
+      if (a.title > b.title)
+        return 1;
+      return 0;
+    }
+    
+    console.log(this.state.problemstatements.sort(compare));
+  
+    
+  }
+  sortViews = () => {
+    
+    function compare(a,b) {
+  
+      console.log(a.views_number,b.views_number)
+  
+      if (a.views_number < b.views_number)
+        return 1;
+      if (a.views_number > b.views_number)
+        return -1;
+      return 0;
+    }
+    
+    console.log(this.state.problemstatements.sort(compare));
+  
+  }
+  
 
   handleChangeDuration = (e) => {
     this.state.selectValueDuration = e.target.value ;
@@ -492,13 +623,24 @@ class App extends React.Component {
       <div className="home-container" >
         <Header {...this.props} />  
         <div className="sorter col-md-12">
-            <span className={challengeClass.join(' ')} onClick={() => {this.toggle(1)}} >Challenges</span>          
+            <span className={challengeClass.join(' ')} onClick={() => {this.toggle(1)}} >
+              <select id="select"         
+                value={this.state.selectValueSort} 
+                onChange={this.handleChangeSort} 
+              > 
+                <option value="all" hidden disabled selected> Challenges </option>
+                <option> Latest </option>
+                <option> Liked </option>
+                <option> Title </option>
+                <option> Views </option>
+              </select>
+            </span>          
             <span className={domainClass.join(' ')} onClick={() => {this.toggle(2)}} > 
               <select id="select"         
                 value={this.state.selectValue} 
                 onChange={this.handleChange} 
               > 
-                <option> All Challenges</option>
+                <option value="All Challenges" disabled selected> Domains </option>
                 <option> Agriculture </option>
                 <option> Social </option>
                 <option> Domain 4 </option>
@@ -513,7 +655,7 @@ class App extends React.Component {
           <div className="the-bar">
 
 
-            <form className="search-bar col-sm-6">
+            <form className="search-bar col-sm-6" onSubmit="return false" action="javascript:void(-1)" >
               <input
                 placeholder="Search"
                 ref= {input => this.search = input}

@@ -76,7 +76,7 @@ class App extends React.Component {
                 to={`/challenge/${this.props.id}`}
                 > */}
                 <div onClick={() => this.updateIterator() } >
-                    <div className="col col-lg-3 col-sm-6 col-xs-6 big-challenge" id={this.props.id} style={opacity} >
+                    <div className="col col-lg-3 col-sm-3 col-xs-6 big-challenge" id={this.props.id} style={opacity} >
                         {/* <div className="category"> Domain: {this.props.domain} </div> */}
                         <div className="challenge" style={matchHeight} >
                             
