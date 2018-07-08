@@ -35,6 +35,7 @@ class App extends React.Component {
             domain: '',
             time_to_show: '',
             queriedstatements: [],
+            current_selected: [],
         }
 
         this.toggle = this.toggle.bind(this);
@@ -79,93 +80,263 @@ class App extends React.Component {
         });
     }
 
+
+    handleClick = (e) => {
+        // access to e.target here
+        console.log(e.target.id)
+        // console.log(e.target.id);
+        // this.setState({current_selected: e.target.id})
+        this.state.current_selected.push(Number(e.target.id))
+        console.log(this.state.current_selected)
+        this.forceUpdate()
+    }
+    handleClickRemove = (e) => {
+        
+        this.state.current_selected.pop(Number(e.target.id))
+        console.log(this.state.current_selected)
+        this.forceUpdate()
+    }
+
     getRows() {
         
+
         var data;
         var rows_to_push = [];
+
+        var current_counter = 0;
 
         if(this.state.optionSelect==0) {
             data = this.state.contestants;
 
-            rows_to_push.push(
-                <tr className="challengeHead" >
-                    <td> Name </td>
-                    <td> Email </td>
-                    <td> Category submitted </td>
-                </tr>
-            )
+            // rows_to_push.push(
+            //     <tr className="challengeHead" >
+            //         <td> Name </td>
+            //         <td> Email </td>
+            //         <td> Category submitted </td>
+            //     </tr>
+            // )
 
             for(var j in data) {
 
                 for(var key in this.state.queriedstatements) {
                             
                     if(j == this.state.queriedstatements[key] ) {
-
-                        rows_to_push.push(
-                            
-                            <tr id={j}>
-                                <td className="contestant-row" > {data[j].team_name} </td>
-                                <td className="contestant-row"> {data[j].college} </td>
-                                <td className="contestant-row"> {data[j].category} </td>
-                            </tr>
-                            
-                        )
+                        if( Object.values(this.state.current_selected).indexOf(current_counter) > -1 ) {
+                            rows_to_push.push(
+                                <tr onClick={((e) => this.handleClickRemove(e))} className="hover-color">
+                                    <td colSpan={3}>
+                                    {console.log(data[j])}
+                                        <table id={current_counter} className='animated hacky-row fadeIn' >
+                                            <tr style={{borderBottom: "none"}} >
+                                                <td>
+                                                    Email: {data[j].email}
+                                                </td>
+                                                <td>
+                                                    { 
+                                                        data[j].is_indivisual ?
+                                                        <div>
+                                                            Sponsor Name: {data[j].organization_name}
+                                                        </div>
+                                                        :
+                                                        <div>
+                                                            organization Name: {data[j].organization_name}
+                                                        </div>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Number of challenges sponsored: {data[j].no_of_sponsors}
+                                                </td>
+                                                <td>
+                                                    Sponsor id: {data[j].id}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                        else {
+                            rows_to_push.push(
+                                
+                                <tr id={j} className="animated fadeIn" >
+                                    <td className="contestant-row" > {data[j].team_name} </td>
+                                    <td className="contestant-row"> {data[j].college} </td>
+                                    {console.log(current_counter)}
+                                    <td id={current_counter} onClick={((e) => this.handleClick(e))} className="sponsor-row view"> <span id={current_counter}> View </span></td>
+                                </tr>
+                                
+                            )
+                        }
                     }
                 }
+            }
+            if( rows_to_push.length==0 ) {
+                rows_to_push.push( 
+                    <tr className="mentorHead animated fadeIn" >
+                        No Contestants yet!
+                    </tr>
+                )
             }
         }
 
         else if(this.state.optionSelect==1) {
             
             data = this.state.sponsors;
-            rows_to_push.push(
-                <tr className="sponsorHead" >
-                    <td> Name </td>
-                    <td> Email </td>
-                    <td> Challenges Sponsored </td>
-                </tr>
-            )
+            // rows_to_push.push(
+            //     <tr className="sponsorHead" >
+            //         <td> Name </td>
+            //         <td> Email </td>
+            //         <td> Challenges Sponsored </td>
+            //     </tr>
+            // )
+            
             for(var j in data) {
 
                 for(var key in this.state.queriedstatements) {
                             
                     if(j == this.state.queriedstatements[key] ) {
-                        rows_to_push.push(
-                            <tr className="sponsor-row">
-                                <td className="sponsor-row"> {data[j].organization_name} </td>
-                                <td className="sponsor-row"> {data[j].email} </td>
-                                <td className="sponsor-row view"> {data[j].no_of_sponsors} </td>
-                            </tr>
-                        )
+                        console.log(current_counter, this.state.current_selected )
+                        console.log(current_counter in this.state.current_selected.values)
+                        console.log(this.state.current_selected.values)
+                        if (Object.values(this.state.current_selected).indexOf(current_counter) > -1) {
+                            console.log(current_counter)
+                        }
+
+                        if( Object.values(this.state.current_selected).indexOf(current_counter) > -1) {
+                            rows_to_push.push(
+                                <tr onClick={((e) => this.handleClickRemove(e))} className="hover-color" >                                    
+                                        {/* {console.log(data[j])} */}
+                                        <td colSpan={3}>
+                                        <table id={current_counter} className='animated hacky-row fadeIn'  >
+                                            <tr style={{borderBottom: "none"}} >
+                                                <td>
+                                                    Email: {data[j].email}
+                                                </td>
+                                                <td>
+                                                    { 
+                                                        data[j].is_indivisual ?
+                                                        <div>
+                                                            Sponsor Name: {data[j].organization_name}
+                                                        </div>
+                                                        :
+                                                        <div>
+                                                            organization Name: {data[j].organization_name}
+                                                        </div>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Number of challenges sponsored: {data[j].no_of_sponsors}
+                                                </td>
+                                                <td>
+                                                    Sponsor id: {data[j].id}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </td>
+                                </tr>
+                            )
+                        }
+                        else {
+                            
+                            rows_to_push.push(
+                                <tr className="sponsor-row animated fadeIn">
+                                    <td className="sponsor-row"> {data[j].organization_name} </td>
+                                    <td className="sponsor-row"> {data[j].email} </td>
+                                    {console.log(current_counter)}
+                                    <td id={current_counter} onClick={((e) => this.handleClick(e))} className="sponsor-row view"> <i id={current_counter} class="fa fa-plus-circle" style={{fontSize:"28px"  }} ></i> </td>
+                                </tr>
+                            )
+                        }
+                        
+                        current_counter+=1;
                     }
                 }
+            }
+            if( rows_to_push.length==0 ) {
+                rows_to_push.push( 
+                    <tr className="mentorHead animated fadeIn" >
+                        No Sponsors yet!
+                    </tr>
+                )
             }
         }
 
         else {
             data = this.state.mentors;
-            rows_to_push.push(
-                <tr className="mentorHead" >
-                    <td> Name </td>
-                    <td> Email </td>
-                    <td> Challenges Mentored </td>
-                </tr>
-            )
+            // rows_to_push.push(
+            //     <tr className="mentorHead" >
+            //         <td> Name </td>
+            //         <td> Email </td>
+            //         <td> Challenges Mentored </td>
+            //     </tr>
+            // )
+            
             for(var j in data) {
 
                 for(var key in this.state.queriedstatements) {
                             
                     if(j == this.state.queriedstatements[key] ) {
-
-                        rows_to_push.push(
-                            <tr>
-                                <td className="mentor-row"> {data[j].organization_name} </td>
-                                <td className="mentor-row"> {data[j].email} </td>
-                                <td className="mentor-row view"> {data[j].no_of_mentors} </td>
-                            </tr>
-                        )
+                        if( Object.values(this.state.current_selected).indexOf(current_counter) > -1) {
+                            rows_to_push.push(
+                                <tr onClick={((e) => this.handleClickRemove(e))} className="hover-color" >                                    
+                                        {/* {console.log(data[j])} */}
+                                        <td colSpan={3}>
+                                        <table id={current_counter} className='animated hacky-row fadeIn'  >
+                                            <tr style={{borderBottom: "none"}} >
+                                                <td>
+                                                    Email: {data[j].email}
+                                                </td>
+                                                <td>
+                                                    { 
+                                                        data[j].is_indivisual ?
+                                                        <div>
+                                                            Sponsor Name: {data[j].organization_name}
+                                                        </div>
+                                                        :
+                                                        <div>
+                                                            organization Name: {data[j].organization_name}
+                                                        </div>
+                                                    }
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Number of challenges sponsored: {data[j].no_of_sponsors}
+                                                </td>
+                                                <td>
+                                                    Sponsor id: {data[j].id}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        </td>
+                                </tr>
+                            )
+                        }
+                        else {
+                            
+                            rows_to_push.push(
+                                
+                                <tr className="animated fadeIn">
+                                    <td className="mentor-row"> {data[j].organization_name} </td>
+                                    <td className="mentor-row"> {data[j].email} </td>
+                                    <td id={current_counter} onClick={((e) => this.handleClick(e))} className="sponsor-row view"> <i id={current_counter} class="fa fa-plus-circle" style={{fontSize:"28px"  }} ></i> </td>
+                                </tr>
+                            )
+                        }
+                        
                     }
                 }
+            }
+            if( rows_to_push.length==0 ) {
+                rows_to_push.push( 
+                    <tr className="mentorHead animated fadeIn" >
+                        No Mentors yet!
+                    </tr>
+                )
             }
         }
 
@@ -173,8 +344,16 @@ class App extends React.Component {
     }
 
     toggle(x) {
-        console.log(x)
-
+        
+        this.state.current_selected = [];
+        // var d = document.getElementById("table-fade");
+        // console.log(d)
+        // d.classList.remove("animated");
+        // d.classList.remove("fadeIn");
+        // console.log(d)
+        // d.classList.add("animated");
+        // d.classList.add("fadeIn");
+        // console.log(d)
         while(this.state.queriedstatements.length>0) {
             this.state.queriedstatements.pop()
         }
@@ -431,33 +610,7 @@ class App extends React.Component {
                         </div>
                     </div>
                     
-                    <div className="challenge-video the-info batch-16">
-                        <table>
-                            <thead>
-                                <th className={contestClass.join(' ')} onClick={() => {this.toggle(0)}} >Contestants</th>
-                                <th className={sponsorClass.join(' ')} onClick={() => {this.toggle(1)}} >Sponsors</th>
-                                <th className={mentorClass.join(' ')} onClick={() => {this.toggle(2)}} >Mentors</th>
-                            </thead>
-                        </table>                            
-                        <form className="col-xs-12 table-search">                                
-
-                            
-                            <input
-                            placeholder="Q"
-                            ref= {input => this.search = input}
-                            onChange={this.handleInputChange}
-                            type="text" 
-                            className="question glyphicon"
-                            id="nme2" required autocomplete="off" 
-                            /> 
-         
-                        </form>
-                        <table>                               
-                            <tbody>
-                                {this.getRows()}
-                            </tbody>
-                        </table>
-                    </div>
+                    
                     <br />                
                 </div>
                     <div className="col-md-3">
@@ -495,6 +648,37 @@ class App extends React.Component {
                     </div>
                 
             </div>
+
+            <div className="the-info col-md-12" style={{paddingLeft: "5%", paddingRight: "5%"}} >
+                <div className="inside-tables">
+                    <table>
+                        <thead>
+                            <th className={contestClass.join(' ')} onClick={() => {this.toggle(0)}} >Contestants</th>
+                            <th className={sponsorClass.join(' ')} onClick={() => {this.toggle(1)}} >Sponsors</th>
+                            <th className={mentorClass.join(' ')} onClick={() => {this.toggle(2)}} >Mentors</th>
+                        </thead>
+                    </table>                            
+                    <form className="col-xs-12 table-search">                                
+
+                        
+                        <input
+                        placeholder="Q"
+                        ref= {input => this.search = input}
+                        onChange={this.handleInputChange}
+                        type="text" 
+                        className="question glyphicon"
+                        id="nme2" required autocomplete="off" 
+                        /> 
+        
+                    </form>
+                    <table style={{marginBottom: "20px"}} className="animated fadeIn" id="table-fade" >                               
+                        <tbody>
+                            {this.getRows()}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div className={ this.state.solutionShow ? "solution-overlay" : "solution-overlay hidden" }>
                 <div className="inner-overlay" >
                     <div className="cross" onClick={() => { this.closeAll() }}> <FaClose /> </div>

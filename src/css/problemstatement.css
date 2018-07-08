@@ -40,9 +40,9 @@
     /* background-color: #ffffff !important;   */
 
 }
-.img-contianer {
+.img-container {
     position: relative;
-    padding: 9% 0;
+    padding: 0 !important;
     background: black;
 }
 .bottom-right {

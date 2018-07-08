@@ -81,7 +81,7 @@ class App extends React.Component {
                         <div className="challenge" style={matchHeight} >
                             
                             {/* <ResponsiveEmbed src={video_link} allowFullScreen /> */}
-                            <div className="img-contianer">
+                            <div className="img-container">
                                 <img className="problem-thumbnail" src={this.props.thumbnail} />
                                 <div className="bottom-right"> {this.props.duration} </div>
                             </div>

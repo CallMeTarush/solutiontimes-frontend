@@ -18,6 +18,10 @@ import { goToAnchor,goToTop } from 'react-scrollable-anchor'
 import { configureAnchors } from 'react-scrollable-anchor'
 import ScrollableAnchor from 'react-scrollable-anchor'
 
+import la from '../img/la.jpg'
+import ca from '../img/chicago.jpg'
+import ny from '../img/ny.jpg'
+
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
@@ -604,6 +608,18 @@ class App extends React.Component {
     goToAnchor('theVideo')
 
   }
+
+  expand() {
+    console.log("lol")
+    // var tags = document.getElementsByClassName("selectTag")
+    // for(var i in tags) {
+    //   tags[i].size = 4;
+    // }
+  }
+  unexpand() {
+    console.log("sdadsa")
+  }
+
   render() {   
     console.log(this.state.selectValue);
     let challengeClass = ["choice choice-block col-xs-6 col-sm-2"];
@@ -623,10 +639,16 @@ class App extends React.Component {
       <div className="home-container" >
         <Header {...this.props} />  
         <div className="sorter col-md-12">
-            <span className={challengeClass.join(' ')} onClick={() => {this.toggle(1)}} >
-              <select id="select"         
+            <span className={challengeClass.join(' ')} onClick={() => {this.toggle(1)}} 
+              onMouseOver={() => {this.expand()}}
+              onMouseOut={()=>{this.unexpand()}}
+              >
+
+              <select id="select" 
+                className="selectTag"          
                 value={this.state.selectValueSort} 
                 onChange={this.handleChangeSort} 
+                
               > 
                 <option value="all" hidden disabled selected> Challenges </option>
                 <option> Latest </option>
@@ -640,7 +662,7 @@ class App extends React.Component {
                 value={this.state.selectValue} 
                 onChange={this.handleChange} 
               > 
-                <option value="All Challenges" disabled selected> Domains </option>
+                <option value="All Challenges" hidden selected> Domains </option>
                 <option> Agriculture </option>
                 <option> Social </option>
                 <option> Domain 4 </option>
@@ -652,9 +674,37 @@ class App extends React.Component {
           <div className="col-md-12">
             {this.getName() }
           </div>
+          <div className="jumbotron" >
+            <h1>Student to Society</h1>      
+            <p>Plan to put the banner here!</p>
+          </div>
+          {/* <div id="myCarousel" className="carousel slide" data-ride="carousel">
+            <ol className="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div className="carousel-inner">
+              <div className="item active">
+                <img src={la} alt="Los Angeles" />
+              </div>
+              <div className="item">
+                <img src={ca} alt="Chicago" />
+              </div>
+              <div className="item">
+                <img src={ny} alt="New York" />
+              </div>
+            </div>
+            <a className="left carousel-control" href="#myCarousel" data-slide="prev">
+              <span className="glyphicon glyphicon-chevron-left"></span>
+              <span className="sr-only">Previous</span>
+            </a>
+            <a className="right carousel-control" href="#myCarousel" data-slide="next">
+              <span className="glyphicon glyphicon-chevron-right"></span>
+              <span className="sr-only">Next</span>
+            </a>
+          </div> */}
           <div className="the-bar">
-
-
             <form className="search-bar col-sm-6" onSubmit="return false" action="javascript:void(-1)" >
               <input
                 placeholder="Search"
