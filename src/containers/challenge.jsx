@@ -128,28 +128,32 @@ class App extends React.Component {
                                     {console.log(data[j])}
                                         <table id={current_counter} className='animated hacky-row fadeIn' >
                                             <tr style={{borderBottom: "none"}} >
-                                                <td>
-                                                    Email: {data[j].email}
+                                                <td style={{width:"50%"}} >
+                                                    Contest ID: {data[j].id}
                                                 </td>
-                                                <td>
+                                                <td style={{width:"50%"}}>
                                                     { 
-                                                        data[j].is_indivisual ?
+                                                        data[j].is_team ?
                                                         <div>
-                                                            Sponsor Name: {data[j].organization_name}
+                                                            Team Name: {data[j].team_name}
                                                         </div>
                                                         :
                                                         <div>
-                                                            organization Name: {data[j].organization_name}
+                                                            Name: {data[j].team_name}
                                                         </div>
                                                     }
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                    Number of challenges sponsored: {data[j].no_of_sponsors}
+                                                <td style={{width:"50%"}}>
+                                                    Category submitted: {data[j].category}
                                                 </td>
-                                                <td>
-                                                    Sponsor id: {data[j].id}
+                                                <td style={{width:"50%"}}>
+                                                    Selected: 
+                                                    {data[j].selected ?
+                                                    <i id={current_counter} class="fa fa-thumbs-up" style={{fontSize:"28px"  }} ></i> :
+                                                    <i id={current_counter} class="fa fa-thumbs-down" style={{fontSize:"28px"  }} ></i>
+                                                    }
                                                 </td>
                                             </tr>
                                         </table>

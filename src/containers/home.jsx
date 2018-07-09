@@ -674,9 +674,11 @@ class App extends React.Component {
           <div className="col-md-12">
             {this.getName() }
           </div>
-          <div className="jumbotron" >
-            <h1>Student to Society</h1>      
-            <p>Plan to put the banner here!</p>
+          <div className="jumbotron col-md-12" >
+            <div className="animated zoomIn">
+              <h1>Student to Society</h1>     
+              <p>Plan to put the banner here!</p>
+            </div>
           </div>
           {/* <div id="myCarousel" className="carousel slide" data-ride="carousel">
             <ol className="carousel-indicators">
